@@ -411,14 +411,6 @@ function startSlogan() {
       en.forEach(en2 => HeroScene.setVisible(en2.intersectionRatio >= 0.15));
     }, { threshold: [0, 0.15, 0.5] }).observe(heroEl);
   }
-  // court lantern follows the pointer (opacity is driven by journey-gl)
-  const lantern = $(".court__lantern");
-  if (lantern && FINE) {
-    addEventListener("pointermove", e => {
-      lantern.style.setProperty("--lx", (e.clientX / innerWidth * 100) + "%");
-      lantern.style.setProperty("--ly", (e.clientY / innerHeight * 100) + "%");
-    }, { passive: true });
-  }
 })();
 
 /* ---------------- Tech strip (qq) ---------------- */
@@ -454,6 +446,23 @@ function startSlogan() {
     }
   });
   slideTitles();
+  // drag / swipe: the strip rides the pinned scroll, so pulling the
+  // stage pulls the scroll — mouse and touch, both directions
+  $$(".qq__img", sec).forEach(img => { img.draggable = false; });
+  let drag = null;
+  stage.addEventListener("pointerdown", e => {
+    if (e.target.closest("a,button")) return;
+    drag = { x: e.clientX, y: e.clientY, sy: scrollY };
+  });
+  addEventListener("pointermove", e => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+    const d = Math.abs(dx) > Math.abs(dy) ? dx : dy;
+    window.scrollTo(0, drag.sy - d * 2.2);
+  }, { passive: true });
+  addEventListener("pointerup", () => { drag = null; });
+  addEventListener("pointercancel", () => { drag = null; });
   // bridge title driven by its own approach
   const bridge = $(".qq__bridge", sec);
   if (bridge) {
@@ -472,7 +481,7 @@ function startSlogan() {
       o.p.style.transform = "translateY(" + o.f.toFixed(1) + "px)";
       if (o.img) o.img.style.transform = "translate(" + (-5 * (o.f / amp)) + "%," + (-4 * (o.f / amp)) + "%)";
       const live = r.right > vw * 0.08;
-      if (live !== o.live) { o.live = live; o.p.classList.toggle("is-live", live); o.p.style.filter = live ? "" : "brightness(.55) saturate(.8)"; }
+      if (live !== o.live) { o.live = live; o.p.classList.toggle("is-live", live); o.p.style.filter = live ? "" : "brightness(.62)"; }
       if (!o.wiped && r.left < vw * 0.7) {
         o.wiped = true;
         gsap.to(o.p, { clipPath: "inset(0% 0% 0% 0%)", duration: 2, ease: "cubic-bezier(.16,1,.3,1)" });
@@ -869,13 +878,34 @@ setTimeout(() => {
 (function initFoot() {
   const slides = $$(".foot__slide");
   if (slides.length < 2) return;
-  let i = 0;
-  setInterval(() => {
-    if (document.hidden || document.documentElement.classList.contains("is-motion-paused")) return;
+  let i = 0, timer = null;
+  const go = n => {
     slides[i].classList.remove("is-on");
-    i = (i + 1) % slides.length;
+    i = ((n % slides.length) + slides.length) % slides.length;
     slides[i].classList.add("is-on");
-  }, 5500);
+  };
+  const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+  const start = () => {
+    stop();
+    timer = setInterval(() => {
+      if (!document.hidden && !document.documentElement.classList.contains("is-motion-paused")) go(i + 1);
+    }, 5500);
+  };
+  // auto-advance only while the footer is actually on screen
+  const foot = slides[0].closest(".foot");
+  if ("IntersectionObserver" in window && foot) {
+    new IntersectionObserver(es => es.forEach(en => { en.isIntersecting ? start() : stop(); }), { threshold: 0.05 }).observe(foot);
+  } else start();
+  // swipe / drag steps through the frames, then auto-advance resumes
+  if (foot) {
+    let sx = null;
+    foot.addEventListener("pointerdown", e => { sx = e.target.closest("a,button") ? null : e.clientX; });
+    foot.addEventListener("pointerup", e => {
+      if (sx === null) return;
+      const dx = e.clientX - sx; sx = null;
+      if (Math.abs(dx) > 36) { go(i + (dx < 0 ? 1 : -1)); start(); }
+    });
+  }
 })();
 
 /* ---------------- Chrome: bar, sound, ink zones ---------------- */

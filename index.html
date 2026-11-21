@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#101216">
 <link rel="preload" href="assets/fonts/FKScreamer-Black.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/main.css?v=13">
+<link rel="stylesheet" href="css/main.css?v=14">
 <script type="application/ld+json">
 {"@context":"https://schema.org","type":"LocalBusiness","name":"STONEFORGE","email":"hello@stoneforgebuilds.com","telephone":"+91 8047122650","address":{"@type":"PostalAddress","streetAddress":"Plot 42, Forge Yard, Whitefield Industrial Area","addressLocality":"Bengaluru","postalCode":"560066","addressCountry":"IN"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","bestRating":"5"}}
 </script>
@@ -113,11 +113,12 @@
   </section>
 
   <!-- ============ COURT / JOURNEY ============ -->
-  <canvas class="court__canvas" id="courtCanvas" data-court-canvas aria-label="A scrolling journey through STONEFORGE project sites, orbiting a tower crane"></canvas>
-  <div class="court__vignette" data-court-vignette aria-hidden="true"></div>
-  <div class="court__lantern" data-court-lantern aria-hidden="true"></div>
-  <section class="court court--gl" id="court" data-court>
+  <section class="court court--still" id="court" data-court>
     <div class="court__track">
+      <figure class="court__media">
+        <img src="assets/img/court-site.webp" alt="STONEFORGE crew pouring a high-rise deck, towers rising behind them" fetchpriority="low">
+        <span class="court__shade" aria-hidden="true"></span>
+      </figure>
       <div class="court__caption" data-court-caption>
         <h2 class="court__title" data-fill="dim" data-fill-trigger="#court" data-fill-start="36% top">We raise landmarks.</h2>
       </div>
@@ -325,10 +326,8 @@
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
-<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js","three/addons/":"./vendor/jsm/"}}</script>
 <script src="js/hero-scene.js?v=1"></script>
-<script src="js/main.js?v=13"></script>
+<script src="js/main.js?v=14"></script>
 <script src="js/forge-motion.js?v=1"></script>
-<script type="module" src="js/journey-gl.js?v=9"></script>
 </body>
 </html>
