@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#101216">
 <link rel="preload" href="assets/fonts/FKScreamer-Black.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/main.css?v=14">
+<link rel="stylesheet" href="css/main.css?v=17">
 <script type="application/ld+json">
 {"@context":"https://schema.org","type":"LocalBusiness","name":"STONEFORGE","email":"hello@stoneforgebuilds.com","telephone":"+91 8047122650","address":{"@type":"PostalAddress","streetAddress":"Plot 42, Forge Yard, Whitefield Industrial Area","addressLocality":"Bengaluru","postalCode":"560066","addressCountry":"IN"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","bestRating":"5"}}
 </script>
@@ -115,12 +115,48 @@
   <!-- ============ COURT / JOURNEY ============ -->
   <section class="court court--still" id="court" data-court>
     <div class="court__track">
-      <figure class="court__media">
-        <img src="assets/img/court-site.webp" alt="STONEFORGE crew pouring a high-rise deck, towers rising behind them" fetchpriority="low">
-        <span class="court__shade" aria-hidden="true"></span>
-      </figure>
-      <div class="court__caption" data-court-caption>
-        <h2 class="court__title" data-fill="dim" data-fill-trigger="#court" data-fill-start="36% top">We raise landmarks.</h2>
+      <div class="court__media">
+        <!-- Journal-spread carousel (own code, journal-spread composition):
+             an open spread in the centre, earlier/later pages standing
+             edge-on in receding stacks; drag, click or arrow keys turn. -->
+        <div class="jbook" id="jbook">
+          <div class="jbook__head">
+            <p class="jbook__kicker">The Site Journal — Vol. 01 · Bengaluru</p>
+            <h2 class="court__title jbook__title">We raise landmarks.</h2>
+          </div>
+          <div class="jbook__stage" id="jbookStage">
+            <div class="jbook__stack jbook__stack--prev" id="jstackPrev" role="button" tabindex="0" aria-label="Previous spread"></div>
+            <div class="jbook__spread" id="jspread">
+              <article class="jpage jpage--left">
+                <figure class="jpage__photo"><img id="jimgMain" src="assets/img/court-site.webp" alt="STONEFORGE crew pouring a high-rise deck, towers rising behind them"></figure>
+                <figure class="jpage__print"><img id="jimgPrint" src="assets/img/film-tower.jpg" alt="Tower rising over the Forge Yard"></figure>
+                <p class="jpage__note" id="jnote">First pour at dawn — deck three, no shortcuts.</p>
+              </article>
+              <article class="jpage jpage--right">
+                <p class="jpage__no" id="jno">Spread 01 — The Pour</p>
+                <h3 class="jpage__h" id="jh">Concrete, poured at first light</h3>
+                <p class="jpage__txt" id="jtxt">Every Stoneforge frame starts before sunrise. The crew sets the deck, the pump rolls in, and 400 cubic metres later the building has a spine.</p>
+                <ul class="jpage__meta" id="jmeta">
+                  <li><b>400 m³</b><span>poured in one shift</span></li>
+                  <li><b>06:10</b><span>first truck on site</span></li>
+                </ul>
+                <p class="jpage__sign" id="jsign">— A.V., site lead</p>
+              </article>
+              <span class="jbook__spine" aria-hidden="true"></span>
+              <div class="jleaf" id="jleaf" aria-hidden="true">
+                <div class="jleaf__face jleaf__face--front"><img id="jleafFront" src="" alt=""></div>
+                <div class="jleaf__face jleaf__face--back"><img id="jleafBack" src="" alt=""></div>
+              </div>
+            </div>
+            <div class="jbook__stack jbook__stack--next" id="jstackNext" role="button" tabindex="0" aria-label="Next spread"></div>
+          </div>
+          <div class="jbook__controls">
+            <button class="jbook__btn" id="jprev" type="button" aria-label="Previous spread">&larr;</button>
+            <p class="jbook__count"><span id="jcur">01</span> / <span id="jtot">04</span></p>
+            <button class="jbook__btn" id="jnext" type="button" aria-label="Next spread">&rarr;</button>
+            <p class="jbook__hint">Drag · Click a page · Arrow keys</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -291,31 +327,78 @@
   <!-- ============ DUSK (empty light transition, as the reference) ============ -->
   <section class="dusk" id="dusk" aria-hidden="true"><span class="dusk__sun"></span></section>
 
-  <!-- ============ FOOTER ============ -->
+  <!-- ============ FOOTER — Forge-Rise: serif-italic CTA over six painted ridges ============ -->
   <footer class="foot" id="footer">
-    <div class="foot__media" aria-hidden="true">
-      <img class="foot__slide is-on" src="assets/img/foot1.webp" alt="">
-      <img class="foot__slide" src="assets/img/foot2.webp" alt="" loading="lazy">
-      <img class="foot__slide" src="assets/img/foot3.webp" alt="" loading="lazy">
+    <div class="foot__sky">
+      <p class="foot__kicker">Stoneforge — Builders &amp; Architects, Bengaluru</p>
+      <h2 class="foot__slogan">Have a site in mind?<br><i>Let&rsquo;s raise it, together.</i></h2>
+      <a class="foot__cta" href="kit.html" data-pt-link data-pt-name="Book a Consultation">Book a Consultation <span aria-hidden="true">&rarr;</span></a>
     </div>
+    <svg class="foot__hills" viewBox="0 0 1440 430" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path class="fridge fridge--1" d="M0,120 C180,84 340,128 560,104 C780,80 920,118 1140,96 C1260,84 1360,100 1440,88 L1440,430 L0,430 Z"/>
+      <path class="fridge fridge--2" d="M0,168 C200,132 380,176 600,150 C820,124 980,164 1180,142 C1290,130 1380,146 1440,136 L1440,430 L0,430 Z"/>
+      <path class="fridge fridge--3" d="M0,216 C190,182 400,224 620,198 C840,172 1000,212 1200,190 C1310,178 1390,192 1440,184 L1440,430 L0,430 Z"/>
+      <path class="fridge fridge--4" d="M0,264 C210,230 420,272 640,246 C860,220 1010,260 1210,238 C1320,226 1395,240 1440,232 L1440,430 L0,430 Z"/>
+      <path class="fridge fridge--5" d="M0,312 C200,280 430,320 660,294 C880,268 1030,306 1220,286 C1330,274 1400,288 1440,280 L1440,430 L0,430 Z"/>
+      <path class="fridge fridge--6" d="M0,362 C220,332 450,368 680,344 C900,320 1060,354 1240,336 C1340,326 1405,338 1440,332 L1440,430 L0,430 Z"/>
+    </svg>
     <span class="foot__grain" aria-hidden="true"></span>
-    <div class="foot__content">
-      <p class="foot__slogan" data-fill="dim"><span class="cf-seg">We Raise</span><br><i class="cf-seg">Landmarks.</i></p>
-    </div>
-    <div class="foot__bar">
-      <div class="foot__legal">
-        <p class="foot__copy">© 2026 STONEFORGE®</p>
-        <a class="foot__sign" href="faq.html" aria-label="STONEFORGE — Top Rated Builders in Bengaluru 2026"><img class="foot__sign-img" src="assets/img/badge-rated.webp" alt="STONEFORGE — Top Rated Builder, Bengaluru 2026" loading="lazy"></a>
-        <p class="foot__founders">Arjun Vale · Dev Rao — Leads</p>
-        <p class="foot__addr">Plot 42, Forge Yard, Whitefield Industrial Area, Bengaluru 560066 · By prior appointment only</p>
+    <div class="foot__ground">
+      <div class="foot__grid">
+        <div class="foot__brand">
+          <p class="foot__mark">STONEFORGE<sup>&reg;</sup></p>
+          <p class="foot__blurb">We raise landmarks — homes, towers and workplaces planned on paper, poured in concrete and finished by hand, across Bengaluru.</p>
+          <div class="foot__socials">
+            <a class="foot__soc" href="https://www.instagram.com/stoneforgebuilds" target="_blank" rel="noopener" aria-label="Stoneforge on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a class="foot__soc" href="https://www.linkedin.com/company/stoneforgebuilds" target="_blank" rel="noopener" aria-label="Stoneforge on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg></a>
+            <a class="foot__soc" href="https://www.youtube.com/@stoneforgebuilds" target="_blank" rel="noopener" aria-label="Stoneforge on YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 8.2a3 3 0 0 0-2.1-2.1C18 5.5 12 5.5 12 5.5s-6 0-7.9.6A3 3 0 0 0 2 8.2 31 31 0 0 0 1.6 12 31 31 0 0 0 2 15.8a3 3 0 0 0 2.1 2.1c1.9.6 7.9.6 7.9.6s6 0 7.9-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 22.4 12 31 31 0 0 0 22 8.2ZM10 15V9l5.2 3z"/></svg></a>
+          </div>
+        </div>
+        <nav class="foot__col" aria-label="Explore">
+          <p class="foot__col-h">Explore</p>
+          <a href="#hero">Index</a>
+          <a href="#court">Projects</a>
+          <a href="#tech">Disciplines</a>
+          <a href="#team">The Leads</a>
+          <a href="#testimonials">Client Words</a>
+        </nav>
+        <nav class="foot__col" aria-label="Company">
+          <p class="foot__col-h">Company</p>
+          <a href="faq.html">FAQ</a>
+          <a href="kit.html" data-pt-link data-pt-name="Book a Consultation">Book a Consultation</a>
+          <a href="#finale">Final Beam</a>
+          <a href="tel:+918047122650">+91 80471 22650</a>
+          <a href="mailto:hello@stoneforgebuilds.com">hello@stoneforgebuilds.com</a>
+        </nav>
+        <div class="foot__col foot__visit">
+          <p class="foot__col-h">Visit the Yard</p>
+          <p>Plot 42, Forge Yard,<br>Whitefield Industrial Area,<br>Bengaluru 560066</p>
+          <p>By prior appointment only</p>
+          <p>Arjun Vale · Dev Rao — Leads</p>
+        </div>
+        <div class="foot__col foot__news">
+          <p class="foot__col-h">Forge Notes</p>
+          <p>One letter a month — new pours, open sites and the beams in between. No noise.</p>
+          <form class="foot__form" id="footForm" novalidate>
+            <label class="foot__sr" for="footEmail">Email address</label>
+            <input id="footEmail" type="email" required placeholder="you@example.com" autocomplete="email">
+            <button type="submit">Subscribe</button>
+          </form>
+          <p class="foot__thanks" id="footThanks" hidden>You&rsquo;re on the list — the next Forge Note lands with the next pour.</p>
+        </div>
       </div>
-      <nav class="foot__nav" aria-label="Footer">
-        <button class="foot__link foot__link--btn" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Pause motion</span></button>
-        <a class="foot__link" href="faq.html">FAQ</a>
-        <a class="foot__link" href="kit.html" data-pt-link data-pt-name="Book a Consultation">Book a Consultation</a>
-        <a class="foot__link" href="tel:+918047122650">+91 80471 22650</a>
-        <a class="foot__link foot__link--mail" href="mailto:hello@stoneforgebuilds.com">Get in touch →</a>
-      </nav>
+      <div class="foot__bar">
+        <div class="foot__legal">
+          <p class="foot__copy">&copy; 2026 STONEFORGE&reg; — Builders &amp; Architects, Bengaluru. All rights reserved.</p>
+          <p class="foot__founders">Arjun Vale · Dev Rao — Leads</p>
+        </div>
+        <nav class="foot__nav" aria-label="Footer">
+          <button class="foot__link foot__link--btn" type="button" data-motion-toggle aria-pressed="false"><span data-motion-label>Pause motion</span></button>
+          <a class="foot__link" href="faq.html">FAQ</a>
+          <a class="foot__link" href="kit.html" data-pt-link data-pt-name="Book a Consultation">Book a Consultation</a>
+          <a class="foot__link foot__link--mail" href="mailto:hello@stoneforgebuilds.com">Get in touch &rarr;</a>
+        </nav>
+      </div>
     </div>
   </footer>
 </main>
@@ -329,5 +412,7 @@
 <script src="js/hero-scene.js?v=1"></script>
 <script src="js/main.js?v=14"></script>
 <script src="js/forge-motion.js?v=1"></script>
+<script src="js/foot-rise.js?v=1"></script>
+<script src="js/journal.js?v=1"></script>
 </body>
 </html>
