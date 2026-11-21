@@ -265,6 +265,7 @@ gsap.ticker.add(() => {
 });
 
 /* ---------------- wt(): the reveal timeline ---------------- */
+let sloganTimer = null; /* declared before wt(): its instant path calls startSlogan() during init */
 function setFinalStates() {
   $$("#hero [data-fill]").forEach(E => $$(".cf-seg", E).forEach(s => { splitSeg(s); s.style.setProperty("--p", 100); }));
   if (ghostSeg) { splitSeg(ghostSeg); ghostSeg.style.setProperty("--p", 100); }
@@ -350,7 +351,6 @@ if (instantIntro) {
 }
 
 /* ---------------- Hero scene boot + DOM parallax ---------------- */
-let sloganTimer = null;
 function startSlogan() {
   const items = $$(".hero__slogan-item", heroEl);
   if (!items.length || sloganTimer) return;
@@ -681,10 +681,10 @@ function startSlogan() {
 
 /* ---------------- Testimonials ---------------- */
 const FILMS = {
-  jenny: { name: "Priya Nair", role: "Homeowner · Villa Forge 12", yt: "", img: "assets/img/film-tower.jpg",
+  jenny: { name: "Priya Nair", role: "Homeowner · Villa Forge 12", yt: "", vid: "assets/video/film-villa.mp4", img: "assets/img/film-tower.jpg",
     title: "Villa Forge 12 — Handover Walkthrough by STONEFORGE",
     cap: "All I can say is WOW! Arjun is amazing… Dev ran our site like clockwork. Every slab, every finish was checked twice… This is the cleanest handover we have ever seen. It's 100% worth the investment… I would recommend STONEFORGE to anyone and everyone looking for the BEST builder!!" },
-  jinith: { name: "Rohan Mehta", role: "Director · Northgate Offices", yt: "", img: "assets/img/film-villa.jpg",
+  jinith: { name: "Rohan Mehta", role: "Director · Northgate Offices", yt: "", vid: "assets/video/film-offices.mp4", img: "assets/img/film-villa.jpg",
     title: "Northgate Tower — Topping Out with STONEFORGE, Bengaluru",
     cap: "Arjun and Dev are awesome people. It was a great experience having them build our tower.. and the structure turned out to be nothing less than flawless!! with good drawings anyone can stack a floor but Arjun knows the right moment to pour and the frame just comes out true!!! Dev is so easy with the crews and my team felt so comfortable with both of them. thank you STONEFORGE for raising our landmark and making it a smooth journey. I would highly recommend them to anyone reading this." }
 };
@@ -742,7 +742,7 @@ const FILMS = {
     $("#lbName").textContent = f.name + " — " + f.role;
     $("#lbTime").textContent = f.title;
     $("#lbCap").innerHTML = "<b>" + f.name + ":</b> “" + f.cap + "”";
-    $("#lbMedia").innerHTML = f.yt ? '<iframe src="https://www.youtube-nocookie.com/embed/' + f.yt + '?autoplay=1&rel=0" title="' + f.title + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>' : '<img src="' + f.img + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block">';
+    $("#lbMedia").innerHTML = f.vid ? '<video src="' + f.vid + '" poster="' + f.img + '" controls autoplay playsinline style="width:100%;height:100%;object-fit:cover;display:block"></video>' : f.yt ? '<iframe src="https://www.youtube-nocookie.com/embed/' + f.yt + '?autoplay=1&rel=0" title="' + f.title + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>' : '<img src="' + f.img + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block">';
     lb.classList.add("is-open");
     lenis.stop();
     $("#lbClose").focus();

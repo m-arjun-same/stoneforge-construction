@@ -574,3 +574,28 @@ html.is-motion-paused *,html.is-motion-paused *:before,html.is-motion-paused *:a
 @media (max-width:767.98px){.studio-grid{grid-template-columns:1fr}}
 
 .tbr-scene__row[hidden]{display:none}
+
+/* ============ FORGE MOTION — Stoneforge motion system (additive layer) ============ */
+.hero__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0;transition:opacity .9s ease .1s;pointer-events:none}
+.hero__video.is-live{opacity:1}
+.hero__floor-strip{transition:opacity .8s ease}
+.hero.fm-vid-live .hero__floor-strip{opacity:0}
+.hero.fm-vid-live .hero__canvas{opacity:0}
+.hero__player-front{transition:opacity .8s ease}
+.hero.fm-vid-live .hero__player-front{opacity:0}
+@media (max-width:820px){.hero__video{object-position:66% 50%}}
+.fm-tape{position:fixed;top:0;left:0;right:0;height:14px;z-index:900;pointer-events:none;background:linear-gradient(180deg,rgba(13,15,18,.94),rgba(13,15,18,.8));border-bottom:1px solid rgba(143,180,255,.28)}
+.fm-tape::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(244,245,246,.4) 0 1px,transparent 1px 10px),repeating-linear-gradient(90deg,rgba(244,245,246,.65) 0 1px,transparent 1px 50px);opacity:.45}
+.fm-tape__fill{position:absolute;left:0;top:0;bottom:0;width:100%;background:linear-gradient(90deg,rgba(47,107,255,.18),rgba(47,107,255,.5));transform:scaleX(0);transform-origin:0 50%}
+.fm-tape__hook{position:absolute;top:0;left:0;width:2px;height:100%;background:#2F6BFF;box-shadow:0 0 6px rgba(47,107,255,.8)}
+.fm-tape__pct{position:absolute;right:8px;top:1px;font-family:var(--mono);font-style:normal;font-size:9px;letter-spacing:.1em;color:#8FB4FF}
+.fm-beam::after{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,#2F6BFF,rgba(47,107,255,0) 78%);transform:scaleX(0);transform-origin:0 50%;transition:transform 1.15s cubic-bezier(.77,0,.18,1);z-index:60;pointer-events:none}
+.fm-beam.fm-lit::after{transform:scaleX(1)}
+.fm-arm .foot__legal>*,.fm-arm .foot__nav>*,.fm-arm .q,.fm-arm .ksec,.fm-arm .studio-card{opacity:0;transform:translateY(34px) rotate(.5deg)}
+.foot__legal>*.fm-in,.foot__nav>*.fm-in,.q.fm-in,.ksec.fm-in,.studio-card.fm-in{opacity:1;transform:translateY(0) rotate(0deg);transition:opacity .65s ease,transform .95s cubic-bezier(.21,1.26,.36,1)}
+.fm-arm .foot__slogan,.fm-arm .rev{opacity:0;transform:translateY(16px) scale(1.045)}
+.foot__slogan.fm-stamp-in,.rev.fm-stamp-in{opacity:1;transform:translateY(0) scale(1);transition:opacity .45s ease,transform .55s cubic-bezier(.2,1.35,.3,1)}
+.qq__img{scale:1.09}
+.tbr-intro__strip{will-change:transform}
+.hero__cta-row .btn,.kit__cta{transition:translate .35s cubic-bezier(.2,.9,.3,1.2),transform .18s cubic-bezier(.4,0,.2,1)}
+@media (prefers-reduced-motion: reduce){.fm-tape{display:none}.fm-beam::after{transition:none}.hero__video{display:none}}
