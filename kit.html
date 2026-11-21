@@ -3,65 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book a Shoot — ShashiClicks Hyderabad</title>
-<meta name="description" content="Book a shoot at ShashiClicks, Hyderabad. Pick your service, add your names, and send the booking to the studio on WhatsApp or email. Booking deposit ₹5,000.">
-<meta name="theme-color" content="#161310">
+<title>Book a Consultation — STONEFORGE Bengaluru</title>
+<meta name="description" content="Book a site consultation with STONEFORGE, Bengaluru. Pick your project type, add your details, and send the request to the Forge on WhatsApp or email. Consultation fee ₹5,000.">
+<meta name="theme-color" content="#101216">
 <link rel="stylesheet" href="css/main.css?v=11">
 <link rel="stylesheet" href="css/kit.css?v=5">
 </head>
 <body>
 <div class="kit">
   <div class="kit__stage">
-    <img src="assets/img/kit-base.webp" alt="Family photograph by ShashiClicks — the live booking preview frame">
+    <img src="assets/img/kit-base.webp" alt="Architectural model on Forge blueprints — the live consultation preview">
     <canvas id="kitCanvas" width="1200" height="900"></canvas>
     <div class="kit__toprow">
-      <a class="bar__logo" href="index.html">SHASHI<b>CLICKS</b>®</a>
-      <span class="kit__room">The Shoot Room</span>
-      <a class="kit__back" href="index.html">Back to the studio →</a>
+      <a class="bar__logo" href="index.html">STONE<b>FORGE</b>®</a>
+      <span class="kit__room">The Consultation Room</span>
+      <a class="kit__back" href="index.html">Back to the Forge →</a>
     </div>
-    <div class="kit__stagecap"><span id="stageSvc">Maternity Photography</span> · ShashiClicks® Hyderabad</div>
+    <div class="kit__stagecap"><span id="stageSvc">High-Rise Construction</span> · STONEFORGE® Bengaluru</div>
   </div>
 
   <form class="kit__panel" id="kitForm">
     <div class="kit__head">
       <h1>Get your custom quote.</h1>
-      <p class="kit__sub">Booking deposit <b>₹5,000</b> · Adjusted against your package · Full catalog on WhatsApp</p>
+      <p class="kit__sub">Consultation fee <b>₹5,000</b> · Adjusted against your project · Full rate card on WhatsApp</p>
     </div>
 
     <section class="ksec">
-      <div class="ksec__h"><h3>Service</h3><span id="vService">Maternity</span></div>
+      <div class="ksec__h"><h3>Project type</h3><span id="vService">High-Rise</span></div>
       <div class="chips" id="serviceChips"></div>
     </section>
 
     <section class="ksec">
-      <div class="ksec__h"><h3>Frame colour</h3><span id="vColor">Classic Gold</span></div>
+      <div class="ksec__h"><h3>Finish palette</h3><span id="vColor">Forge Blue</span></div>
       <div class="swbar" id="swatches">
-        <button type="button" data-color="#C96F4A" data-name="Classic Gold" style="background:#C96F4A" class="on" aria-label="Classic Gold frame"></button>
-        <button type="button" data-color="#EDE4D2" data-name="Sand" style="background:#EDE4D2" aria-label="Sand frame"></button>
-        <button type="button" data-color="#F6F0E2" data-name="Cream" style="background:#F6F0E2" aria-label="Cream frame"></button>
-        <button type="button" data-color="#706A5E" data-name="Warm Taupe" style="background:#706A5E" aria-label="Warm Taupe frame"></button>
-        <button type="button" data-color="#211A12" data-name="Espresso" style="background:#211A12" aria-label="Espresso frame"></button>
+        <button type="button" data-color="#2F6BFF" data-name="Forge Blue" style="background:#2F6BFF" class="on" aria-label="Forge Blue finish"></button>
+        <button type="button" data-color="#E8EAED" data-name="Concrete" style="background:#E8EAED" aria-label="Concrete finish"></button>
+        <button type="button" data-color="#F4F5F6" data-name="Limewash" style="background:#F4F5F6" aria-label="Limewash finish"></button>
+        <button type="button" data-color="#6E767E" data-name="Steel Grey" style="background:#6E767E" aria-label="Steel Grey finish"></button>
+        <button type="button" data-color="#17191C" data-name="Graphite" style="background:#17191C" aria-label="Graphite finish"></button>
       </div>
-      <p class="kit__note">Every frame is finished by hand in the studio. The preview is approximate — we confirm the final finish with you before printing.</p>
+      <p class="kit__note">Every finish is sampled on site first. The preview is approximate — we confirm the final palette with you before we build.</p>
     </section>
 
     <section class="ksec">
-      <div class="ksec__h"><h3>Your names</h3><span>Type yours</span></div>
-      <p class="kit__label">Names framed on the portrait — initials stay</p>
-      <div class="ini-box"><span id="iniPreview">YN</span></div>
+      <div class="ksec__h"><h3>Your mark</h3><span>Type yours</span></div>
+      <p class="kit__label">Name cast into the structure — initials stay</p>
+      <div class="ini-box"><span id="iniPreview">AV</span></div>
       <input type="text" id="kName" placeholder="Your name *" required>
-      <input type="text" id="kNames" placeholder="Names to frame (e.g. Aarav &amp; Diya)">
+      <input type="text" id="kNames" placeholder="Name for the foundation stone (e.g. The Nair Residence)">
     </section>
 
     <section class="ksec">
-      <div class="ksec__h"><h3>Shoot location</h3><span id="vPlace">Studio — Hafeezpet</span></div>
+      <div class="ksec__h"><h3>Site location</h3><span id="vPlace">Forge Yard — Whitefield</span></div>
       <div class="chips" id="placeChips">
-        <button type="button" class="on">Studio — Hafeezpet</button>
-        <button type="button">Outdoor location</button>
-        <button type="button">Your home</button>
-        <button type="button">Event venue</button>
+        <button type="button" class="on">Forge Yard — Whitefield</button>
+        <button type="button">Your plot</button>
+        <button type="button">Existing building</button>
+        <button type="button">Commercial site</button>
       </div>
-      <p class="kit__note">Studio shooting is included in all packages at no extra charge. Location / garden charges are extra, at current rates.</p>
+      <p class="kit__note">A Forge Yard consultation is included in all projects at no extra charge. Travel to distant sites is charged at current rates.</p>
     </section>
 
     <section class="ksec">
@@ -71,47 +71,47 @@
         <input type="tel" id="kPhone" placeholder="Phone / WhatsApp *">
       </div>
       <input type="email" id="kEmail" placeholder="Email">
-      <label class="ck"><input type="checkbox" class="addon" value="Image HD retouch"><span>Image HD retouch</span></label>
-      <label class="ck"><input type="checkbox" class="addon" value="Album design & printing"><span>Album design &amp; printing</span></label>
-      <label class="ck"><input type="checkbox" class="addon" value="Poster design"><span>Poster design (in-house printing up to 44″ wide)</span></label>
-      <label class="ck"><input type="checkbox" class="addon" value="Video editing"><span>Video editing</span></label>
-      <label class="ck"><input type="checkbox" class="addon" value="Photobook"><span>Photobook</span></label>
-      <label class="ck"><input type="checkbox" class="addon" value="Additional edited photos (₹600 each)"><span>Additional edited photos — ₹600 each</span></label>
-      <label class="ck"><input type="checkbox" class="addon" value="Private session — photos not shared online (40% non-usage fee)"><span>Private session — photos not shared online</span></label>
-      <textarea id="kNotes" rows="3" placeholder="Tell us about your story, themes you love, anything we should know…"></textarea>
+      <label class="ck"><input type="checkbox" class="addon" value="Structural audit report"><span>Structural audit report</span></label>
+      <label class="ck"><input type="checkbox" class="addon" value="Blueprint set & printing"><span>Blueprint set &amp; printing</span></label>
+      <label class="ck"><input type="checkbox" class="addon" value="3D model & renders"><span>3D model &amp; renders</span></label>
+      <label class="ck"><input type="checkbox" class="addon" value="Drone progress films"><span>Drone progress films</span></label>
+      <label class="ck"><input type="checkbox" class="addon" value="Handover dossier"><span>Handover dossier</span></label>
+      <label class="ck"><input type="checkbox" class="addon" value="Additional drawing revisions (₹600 each)"><span>Additional drawing revisions — ₹600 each</span></label>
+      <label class="ck"><input type="checkbox" class="addon" value="Private project — site not published (40% privacy fee)"><span>Private project — site not published</span></label>
+      <textarea id="kNotes" rows="3" placeholder="Tell us about your project, styles you love, anything we should know…"></textarea>
     </section>
 
     <div class="kit__summary">
-      <div class="sumrow"><span id="sumLine">Maternity Photography — booking deposit</span><span>₹5,000</span></div>
+      <div class="sumrow"><span id="sumLine">High-Rise Construction — consultation fee</span><span>₹5,000</span></div>
       <div class="sumrow sumrow--total"><span>Total due today</span><span>₹5,000</span></div>
-      <div class="sumrow sumrow--gold"><span>Adjusted against your package total</span><span>− ₹5,000 later</span></div>
-      <button type="button" class="kit__cta" id="sendWa">Request your shoot <span class="arr">→</span></button>
+      <div class="sumrow sumrow--gold"><span>Adjusted against your project total</span><span>− ₹5,000 later</span></div>
+      <button type="button" class="kit__cta" id="sendWa">Request your consultation <span class="arr">→</span></button>
       <div class="kit__alt">
         <button type="button" id="sendMail">Send by email</button>
-        <a href="tel:+917032857077">Call +91 70328 57077</a>
+        <a href="tel:+918047122650">Call +91 80471 22650</a>
       </div>
-      <p class="kit__fine">No payment now — we confirm availability first. Studio visits by prior appointment only · 10:30 AM – 7 PM, 7 days.</p>
+      <p class="kit__fine">No payment now — we confirm availability first. Forge Yard visits by prior appointment only · 10:30 AM – 7 PM, 7 days.</p>
     </div>
   </form>
 </div>
 
 <section class="studio-sec" id="studio">
-  <p class="studio-sec__kick">The Studio — the people behind the lens</p>
-  <h2 class="studio-sec__title">Two founders.<br>One frame.</h2>
+  <p class="studio-sec__kick">The Forge — the people behind the crane</p>
+  <h2 class="studio-sec__title">Two leads.<br>One landmark.</h2>
   <div class="studio-grid">
     <article class="studio-card">
-      <img src="assets/img/founder-shashi.webp" alt="Shashi Patel, founder of ShashiClicks" loading="lazy">
-      <h3>Shashi Patel</h3>
-      <p class="role">Founder · NIT Raipur</p>
-      <p>“I am Shashi—an NITian by qualification, an artist at heart, and the founder of SHASHICLICKS®. My love affair with photography began in childhood with a Kodak reel camera and followed me through my engineering days at NIT Raipur. Realizing that freezing moments was my true calling, I chose passion over a corporate desk. From a mother's maternity glow and a newborn's first smile to a toddler's first hesitant steps, I pour my heart and soul into every frame. For me, every single click isn't just a service; it's a timeless memory crafted both for my clients and myself.”</p>
-      <p class="line">“To click every shot as our favourite for life time!” — the studio vision</p>
+      <img src="assets/img/founder-arjun.webp" alt="Arjun Vale, founder of STONEFORGE" loading="lazy">
+      <h3>Arjun Vale</h3>
+      <p class="role">Founder · Principal Builder</p>
+      <p>“I am Arjun — a civil engineer by qualification, a builder at heart, and the founder of STONEFORGE®. My love affair with structures began in childhood with a steel Meccano set and followed me through my engineering days at RV College, Bengaluru. Realising that raising landmarks was my true calling, I chose the site over a corporate desk. From a family's first foundation and a tower's first slab to the final handover key, I pour my heart and soul into every pour. For me, every single build isn't just a service; it's a landmark raised both for my clients and myself.”</p>
+      <p class="line">“To raise every structure as our favourite for a lifetime!” — the Forge vision</p>
     </article>
     <article class="studio-card">
-      <img src="assets/img/founder-neelam.webp" alt="Neelam Patel, co-founder of ShashiClicks" loading="lazy">
-      <h3>Neelam Patel</h3>
-      <p class="role">Co-Founder &amp; Studio Manager · Telangana State Photography Award</p>
-      <p>“An engineer by profession and photographer by passion. Photography is not something that she had planned on doing in the first place, but deep down she always had love for it. Being an IT professional, she did not have much time to spend on photography, so she started spending her weekends and holidays to upgrade her skills and soon decided to take photography as her full-time profession &amp; put her skills &amp; efforts towards perfection, and she is still going on. Now she has over 9 years' experience in the professional photography industry. Over this period of time she got a chance to be part of many prestigious photo contests &amp; awards and was privileged to be the winner of the Telangana state photography award and corporate &amp; national level awards.”</p>
-      <p class="line">“If you call the studio phone, I'm who you'll speak with.” — Neelam, the Newborn Whisperer</p>
+      <img src="assets/img/founder-dev.webp" alt="Dev Rao, co-founder of STONEFORGE" loading="lazy">
+      <h3>Dev Rao</h3>
+      <p class="role">Co-Founder &amp; Structures Lead · Karnataka State Build Award</p>
+      <p>“An engineer by profession and builder by passion. Construction is not something that he had planned on doing in the first place, but deep down he always had love for it. Being a site professional, he did not have much time to spend on design, so he started spending his weekends and holidays to upgrade his skills and soon decided to take building as his full-time profession &amp; put his skills &amp; efforts towards perfection, and he is still going on. Now he has over 9 years' experience in the professional construction industry. Over this period of time he got a chance to be part of many prestigious build contests &amp; awards and was privileged to be the winner of the Karnataka state build award and corporate &amp; national level awards.”</p>
+      <p class="line">“If you call the Forge phone, I'm who you'll speak with.” — Dev, the Slab Whisperer</p>
     </article>
   </div>
 </section>

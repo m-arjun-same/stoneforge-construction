@@ -112,7 +112,7 @@ window.HeroScene = (function () {
       "float shim=.72+.40*vnoise(vec2(along*2.6-uTime*.16,uTime*9.));",
       "float fall=mix(.55,1.,smoothstep(0.,.85,uv.y));",
       "float a=b*.16*shim*fall;a=min(a,1.85*.16);",
-      "gl_FragColor=vec4(vec3(1.,.84,.63)*a,1.);}"
+      "gl_FragColor=vec4(vec3(.70,.83,1.)*a,1.);}"
     ].join("\n"));
     P.haze = prog([
       "precision highp float;varying vec2 vUv;",
@@ -123,7 +123,7 @@ window.HeroScene = (function () {
       "float band=exp(-pow((uv.y-.5)/.35,2.));",
       "float dens=mix(.45,1.,1.-uv.y);",
       "float a=uGain*band*dens*(.55+.45*n);",
-      "gl_FragColor=vec4(vec3(1.,.85,.65)*a,1.);}"
+      "gl_FragColor=vec4(vec3(.72,.84,1.)*a,1.);}"
     ].join("\n"));
     P.shadow = prog([
       "precision highp float;varying vec2 vUv;",
@@ -142,7 +142,7 @@ window.HeroScene = (function () {
       "float bc=beamCoord(uv);float sw=bandAt(bc,uSweep,.075);",
       "float rows=smoothstep(.34,.38,uv.y)*(1.-smoothstep(.80,.84,uv.y));",
       "float hot=exp(-dot((uv-vec2(.663,.603))/vec2(.045,.045),(uv-vec2(.663,.603))/vec2(.045,.045)));",
-      "vec3 add=vec3(1.,.9,.75)*(sw*rows*.8+hot*sw*.6)*tx.a;",
+      "vec3 add=vec3(.78,.88,1.)*(sw*rows*.8+hot*sw*.6)*tx.a;",
       "gl_FragColor=vec4((tx.rgb+add)*tx.a,tx.a);}"
     ].join("\n"));
     P.grain = prog([
@@ -258,7 +258,7 @@ window.HeroScene = (function () {
       var dp = gl.createProgram();
       gl.attachShader(dp, sh(gl.VERTEX_SHADER, P.dustVertSrc));
       gl.attachShader(dp, sh(gl.FRAGMENT_SHADER,
-        "precision highp float;varying float vA;void main(){vec2 d=gl_PointCoord-.5;float m=smoothstep(.5,.12,length(d));gl_FragColor=vec4(vec3(1.,.886,.706)*vA*m,1.);}"));
+        "precision highp float;varying float vA;void main(){vec2 d=gl_PointCoord-.5;float m=smoothstep(.5,.12,length(d));gl_FragColor=vec4(vec3(.72,.85,1.)*vA*m,1.);}"));
       gl.linkProgram(dp);
       P.dustReal = { p: dp, u: { uTime: gl.getUniformLocation(dp, "uTime"), uRes: gl.getUniformLocation(dp, "uRes"), uPx: gl.getUniformLocation(dp, "uPx"), uFade: gl.getUniformLocation(dp, "uFade") }, aSeed: gl.getAttribLocation(dp, "aSeed") };
       quad = gl.createBuffer();

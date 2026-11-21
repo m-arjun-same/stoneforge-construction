@@ -1,4 +1,4 @@
-/* ShashiClicks — own code. All motion values from CODEBASE-SPEC.md
+/* STONEFORGE — own code. All motion values from CODEBASE-SPEC.md
    (Annex B): Lenis lerp .09 driven by GSAP ticker, master ease
    cubic-bezier(.625,.05,0,1), loader from asset progress, wt() reveal. */
 (function () {
@@ -97,7 +97,7 @@ let ghostSeg = null, h1FillTl = null, ghostFillTl = null, tagFillTl = null;
   $(".hero__copy", heroEl).appendChild(ghost);
   ghostSeg = $(".cf-seg", ghost);
   const tag = $(".hero__tagline", heroEl);
-  if (tag) { tag.style.setProperty("--final", "#FFBC84"); tag.style.setProperty("--unread", "rgba(255,188,132,0)"); tag.style.setProperty("--edge", "#FFBC84"); }
+  if (tag) { tag.style.setProperty("--final", "#8FB4FF"); tag.style.setProperty("--unread", "rgba(143,180,255,0)"); tag.style.setProperty("--edge", "#8FB4FF"); }
 })();
 function heroLayout() {
   if (!giantSeg || MOBILE()) return;
@@ -216,7 +216,7 @@ try { const nav = performance.getEntriesByType("navigation")[0]; if (nav) navTyp
 let connSlow = false;
 try { const c = navigator.connection; if (c && (c.saveData || /2g/.test(c.effectiveType || ""))) connSlow = true; } catch (e) {}
 const instantIntro = RM || connSlow || navType === "back_forward" ||
-  sessionStorage.getItem("shashi-intro-seen") === "1" || sessionStorage.getItem("pt-nav") === "1";
+  sessionStorage.getItem("stoneforge-intro-seen") === "1" || sessionStorage.getItem("pt-nav") === "1";
 sessionStorage.removeItem("pt-nav");
 
 let loadTarget = 0, loadShown = 0, loadDone = false, revealStarted = false;
@@ -280,11 +280,11 @@ function setFinalStates() {
 function wt(instant) {
   if (revealStarted) return;
   revealStarted = true;
-  sessionStorage.setItem("shashi-intro-seen", "1");
+  sessionStorage.setItem("stoneforge-intro-seen", "1");
   document.documentElement.classList.remove("is-prepaint");
   ScrollTrigger.refresh();
-  window.__shashiRevealed = true;
-  dispatchEvent(new CustomEvent("shashi-reveal"));
+  window.__stoneforgeRevealed = true;
+  dispatchEvent(new CustomEvent("stoneforge-reveal"));
   if (instant) {
     if (loaderEl) loaderEl.style.display = "none";
     const ln = $(".loader-num"); if (ln) ln.style.display = "none";
@@ -508,7 +508,7 @@ function startSlogan() {
   });
 })();
 
-/* ---------------- Team: your names, framed (knit) ---------------- */
+/* ---------------- Team: your mark, cast (knit) ---------------- */
 (function initKnit() {
   const scene = $("#knit"); if (!scene) return;
   const bgV = $(".tbr-scene__view--bg", scene), frontV = $(".tbr-scene__view--front", scene);
@@ -518,7 +518,7 @@ function startSlogan() {
   const sctx = stitchC.getContext("2d"), fxctx = fxC.getContext("2d");
   const ANCHOR = { x: 1493, y: 893 };
   let W = 0, H = 0, coverI = 1, offX = 0, offY = 0;
-  let stitchPts = [], stitchP = 0, curName = "SHASHI PATEL", cardProg = 0;
+  let stitchPts = [], stitchP = 0, curName = "ARJUN VALE", cardProg = 0;
   const mapPt = (x, y) => ({ x: x * coverI + offX, y: y * coverI + offY });
   function sizeCanvases() {
     const r = scene.getBoundingClientRect();
@@ -531,7 +531,7 @@ function startSlogan() {
     drawStitch();
   }
   function initialsOf(name) {
-    return name.trim().split(/\s+/).filter(Boolean).map(w => w[0].toUpperCase()).join("").slice(0, 3) || "SP";
+    return name.trim().split(/\s+/).filter(Boolean).map(w => w[0].toUpperCase()).join("").slice(0, 3) || "AV";
   }
   function computeStitch() {
     const ini = initialsOf(curName);
@@ -642,7 +642,7 @@ function startSlogan() {
   /* init runs under .is-prepaint (sections display:none → W/H measure 0);
      re-measure once the reveal makes the scene measurable — the same
      pattern the finale uses for its geometry */
-  addEventListener("shashi-reveal", () => setTimeout(() => { sizeCanvases(); spineUpdate(lastSpineP); }, 60));
+  addEventListener("stoneforge-reveal", () => setTimeout(() => { sizeCanvases(); spineUpdate(lastSpineP); }, 60));
   const wordFill = playColorFill(word, { manual: true, dur: 1.2 });
   const cardTl = gsap.timeline({ paused: true });
   cardTl.fromTo($$(".tbr-scene__corner", card), { scale: 0 }, { scale: 1, duration: 0.2, ease: "back.out(3)", stagger: 0.05 }, 0)
@@ -672,7 +672,7 @@ function startSlogan() {
   const cta = $("#namesCta"), row = $("#namesRow"), input = $("#nameInput"), mono = $("#namesMono");
   if (cta) cta.addEventListener("click", () => { row.hidden = false; cta.style.display = "none"; input.focus(); });
   if (input) input.addEventListener("input", () => {
-    curName = input.value.trim() || "SHASHI PATEL";
+    curName = input.value.trim() || "ARJUN VALE";
     mono.textContent = initialsOf(curName);
     buildSpine(); computeStitch(); drawStitch();
   });
@@ -681,12 +681,12 @@ function startSlogan() {
 
 /* ---------------- Testimonials ---------------- */
 const FILMS = {
-  jenny: { name: "Jenny Lakra", role: "Newborn shoot client", yt: "PV_qwUB5kUg",
-    title: "Newborn Photography Session by SHASHICLICKS — Shashi Patel",
-    cap: "All I can say is WOW! Shashi is amazing… Neelam is a baby whisperer. She took such great care of our son during the shoot… They are the most beautiful newborn photos I've ever seen. It's 100% worth the investment… I would recommend Shashiclicks to anyone and everyone looking for the BEST NEWBORN photographer!!" },
-  jinith: { name: "Jinith Rs", role: "Lead Software Engineer · S&P Global", yt: "c9C2lxa2X_w",
-    title: "Newborn BabyGirl — SHASHICLICKS, Hyderabad, India",
-    cap: "Shashi and Neelam are awesome people. It was a great experience having them shoot our baby boy.. and the photos turned out to be nothing less than magic!! with a good camera anyone can capture a good image but Shashi knows the right moment to click and the picture just turn out to be awesome!!! Neelam is so easy with the kids and my boy felt so comfortable with both of them. thank you shashiclicks for capturing our moments and making it sweet memories. I would highly recommend them to anyone reading this." }
+  jenny: { name: "Priya Nair", role: "Homeowner · Villa Forge 12", yt: "", img: "assets/img/film-tower.jpg",
+    title: "Villa Forge 12 — Handover Walkthrough by STONEFORGE",
+    cap: "All I can say is WOW! Arjun is amazing… Dev ran our site like clockwork. Every slab, every finish was checked twice… This is the cleanest handover we have ever seen. It's 100% worth the investment… I would recommend STONEFORGE to anyone and everyone looking for the BEST builder!!" },
+  jinith: { name: "Rohan Mehta", role: "Director · Northgate Offices", yt: "", img: "assets/img/film-villa.jpg",
+    title: "Northgate Tower — Topping Out with STONEFORGE, Bengaluru",
+    cap: "Arjun and Dev are awesome people. It was a great experience having them build our tower.. and the structure turned out to be nothing less than flawless!! with good drawings anyone can stack a floor but Arjun knows the right moment to pour and the frame just comes out true!!! Dev is so easy with the crews and my team felt so comfortable with both of them. thank you STONEFORGE for raising our landmark and making it a smooth journey. I would highly recommend them to anyone reading this." }
 };
 (function initTtl() {
   const sec = $("#testimonials"); if (!sec) return;
@@ -742,7 +742,7 @@ const FILMS = {
     $("#lbName").textContent = f.name + " — " + f.role;
     $("#lbTime").textContent = f.title;
     $("#lbCap").innerHTML = "<b>" + f.name + ":</b> “" + f.cap + "”";
-    $("#lbMedia").innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + f.yt + '?autoplay=1&rel=0" title="' + f.title + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    $("#lbMedia").innerHTML = f.yt ? '<iframe src="https://www.youtube-nocookie.com/embed/' + f.yt + '?autoplay=1&rel=0" title="' + f.title + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>' : '<img src="' + f.img + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block">';
     lb.classList.add("is-open");
     lenis.stop();
     $("#lbClose").focus();
@@ -913,7 +913,7 @@ const bar = $(".bar"), snd = $("#snd");
 /* ---------------- Motion toggle (delegated) ---------------- */
 function setMotion(paused) {
   document.documentElement.classList.toggle("is-motion-paused", paused);
-  try { localStorage.setItem("shashi-motion", paused ? "paused" : "on"); } catch (e) {}
+  try { localStorage.setItem("stoneforge-motion", paused ? "paused" : "on"); } catch (e) {}
   $$("[data-motion-toggle]").forEach(b => {
     b.setAttribute("aria-pressed", paused);
     const l = $("[data-motion-label]", b);
@@ -924,7 +924,7 @@ document.addEventListener("click", e => {
   const b = e.target.closest("[data-motion-toggle]");
   if (b) setMotion(!document.documentElement.classList.contains("is-motion-paused"));
 });
-try { if (localStorage.getItem("shashi-motion") === "paused") setMotion(true); } catch (e) {}
+try { if (localStorage.getItem("stoneforge-motion") === "paused") setMotion(true); } catch (e) {}
 
 /* ---------------- Shot clock HUD (desktop only) ---------------- */
 (function initShotclock() {
@@ -938,10 +938,10 @@ try { if (localStorage.getItem("shashi-motion") === "paused") setMotion(true); }
     " ": "00000000000000000000000000000000000"
   };
   const chapters = [
-    { el: "#hero", name: "THE STUDIO" }, { el: "#court", name: "THE JOURNEY" },
-    { el: "#tech", name: "SPECIALITIES" }, { el: "#team", name: "YOUR NAMES" },
-    { el: "#testimonials", name: "WORD OF MOUTH" }, { el: "#finale", name: "GET READY" },
-    { el: "#dusk", name: "FINAL FRAME" }
+    { el: "#hero", name: "THE FORGE" }, { el: "#court", name: "THE JOURNEY" },
+    { el: "#tech", name: "DISCIPLINES" }, { el: "#team", name: "YOUR MARK" },
+    { el: "#testimonials", name: "WORD OF MOUTH" }, { el: "#finale", name: "RAISE IT" },
+    { el: "#dusk", name: "FINAL BEAM" }
   ];
   const nav = document.createElement("nav");
   nav.className = "shotclock"; nav.id = "shotclock"; nav.setAttribute("aria-label", "Chapters");
@@ -996,7 +996,7 @@ try { if (localStorage.getItem("shashi-motion") === "paused") setMotion(true); }
     });
   }
   computeGeom();
-  addEventListener("shashi-reveal", () => setTimeout(computeGeom, 60));
+  addEventListener("stoneforge-reveal", () => setTimeout(computeGeom, 60));
   ScrollTrigger.addEventListener("refresh", computeGeom);
   ScrollTrigger.create({ trigger: "#finale", start: "top 8%", endTrigger: "#dusk", end: "top 80%", toggleClass: { targets: nav, className: "shotclock--ink" } });
   $("[data-sc-index]", nav).addEventListener("click", () => preview.classList.toggle("is-on"));
@@ -1042,7 +1042,7 @@ try { if (localStorage.getItem("shashi-motion") === "paused") setMotion(true); }
   let busy = false;
   function runDoor(a) {
     if (busy) return; busy = true;
-    const name = a.dataset.ptName || "Book a Shoot";
+    const name = a.dataset.ptName || "Book a Consultation";
     nameEl.innerHTML = "";
     name.split("").forEach(ch => {
       const s = document.createElement("span");

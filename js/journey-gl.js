@@ -1,7 +1,7 @@
 /* Court scene — own code, values from CODEBASE-SPEC Annex B §8.
-   The Canon camera GLB takes the sock's exact transform role: it flies
+   The tower-crane GLB takes the sock's exact transform role: it flies
    from the hero card anchor (Bézier) to centre (0, .61, 0) at scale 1.27,
-   ringed by 7 photo cards (5 mobile) on a 1.5-turn helix. A constant
+   ringed by 7 project cards (5 mobile) on a 1.5-turn helix. A constant
    inner offset turns the carrier's rest rotation (π) into the GLB's
    readable +30° three-quarter front — noted delta, geometry unchanged. */
 import * as THREE from 'three';
@@ -166,7 +166,7 @@ function buildDisintegration(holderEl) {
       'uniform float uHe;',
       'varying float vPh;',
       'void main(){',
-      ' vec3 col = mix(vec3(0.93, 0.85, 0.66), vec3(1.0, 0.96, 0.84), vPh);',
+      ' vec3 col = mix(vec3(0.80, 0.88, 0.97), vec3(0.92, 0.96, 1.0), vPh);',
       ' gl_FragColor = vec4(col, uHe * (0.5 + 0.5 * vPh));',
       '}'
     ].join('\n')
@@ -176,7 +176,7 @@ function buildDisintegration(holderEl) {
   disPts.visible = false;
   holderEl.add(disPts);
   if (renderer) disMat.uniforms.uScaleH.value = renderer.domElement.height / (2 * Math.tan(42 * Math.PI / 360));
-  // x-ray grid discard + gold grid tint on the model's own materials
+  // x-ray grid discard + blue grid tint on the model's own materials
   geo.computeBoundingBox();
   const gh = geo.boundingBox ? geo.boundingBox.getSize(new THREE.Vector3()).y : 0;
   if (gh) xrayU.uCell.value = gh / 22;
@@ -203,7 +203,7 @@ function buildDisintegration(holderEl) {
           ' if (uXrayK > 0.001) {',
           '   vec3 xgF = abs(fract(xgPos) - 0.5);',
           '   float xgEdge = smoothstep(0.40, 0.5, max(xgF.x, max(xgF.y, xgF.z)));',
-          '   diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.98, 0.80, 0.50), xgEdge * uXrayK * 0.9);',
+          '   diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.45, 0.68, 1.0), xgEdge * uXrayK * 0.9);',
           ' }'
         ].join('\n'));
     };
@@ -216,7 +216,7 @@ function makeHeadTexture(text) {
   const c = document.createElement('canvas');
   c.width = 1024; c.height = 256;
   const x = c.getContext('2d');
-  const FIN = [246, 240, 226], TER = [201, 111, 74], UNR = [139, 125, 107];
+  const FIN = [244, 245, 246], TER = [47, 107, 255], UNR = [120, 130, 140];
   const draw = p => {
     x.clearRect(0, 0, 1024, 256);
     x.font = '900 190px "FK Screamer", Impact, sans-serif';
@@ -247,16 +247,16 @@ function makeHeadTexture(text) {
     // the sweep completes, as in the reference's court frames.
     x.globalCompositeOperation = 'source-atop';
     const bg = x.createLinearGradient(900, 0, 340, 256);
-    bg.addColorStop(0, 'rgba(255,244,214,0.52)');
-    bg.addColorStop(0.42, 'rgba(255,244,214,0.12)');
-    bg.addColorStop(0.68, 'rgba(12,10,8,0.18)');
-    bg.addColorStop(1, 'rgba(12,10,8,0.27)');
+    bg.addColorStop(0, 'rgba(215,232,255,0.52)');
+    bg.addColorStop(0.42, 'rgba(215,232,255,0.12)');
+    bg.addColorStop(0.68, 'rgba(10,12,14,0.18)');
+    bg.addColorStop(1, 'rgba(10,12,14,0.27)');
     x.fillStyle = bg;
     x.fillRect(0, 0, 1024, 256);
     const rg = x.createRadialGradient(740, 6, 40, 740, 6, 720);
-    rg.addColorStop(0, 'rgba(255,242,208,0.35)');
-    rg.addColorStop(0.55, 'rgba(255,242,208,0.10)');
-    rg.addColorStop(1, 'rgba(255,242,208,0)');
+    rg.addColorStop(0, 'rgba(205,226,252,0.35)');
+    rg.addColorStop(0.55, 'rgba(205,226,252,0.10)');
+    rg.addColorStop(1, 'rgba(205,226,252,0)');
     x.fillStyle = rg;
     x.fillRect(0, 0, 1024, 256);
     x.globalCompositeOperation = 'source-over';
@@ -280,19 +280,19 @@ function init() {
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, S.mobile ? 1.25 : 1.5));
 
   scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x0E0C09, 0);
+  scene.fog = new THREE.FogExp2(0x0C0E11, 0);
   camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.05, 40);
 
   // ---- lights (Annex B §8.4) ----
-  spot = new THREE.SpotLight(0xEFD5A2, 0, 0, 0.3, 0.9, 1.45);
+  spot = new THREE.SpotLight(0xDCE9F5, 0, 0, 0.3, 0.9, 1.45);
   spot.position.set(2.24, 4.8, -1.04);
   spotTarget = new THREE.Object3D(); spotTarget.position.set(-0.3, 0, -0.75);
   scene.add(spotTarget); spot.target = spotTarget; scene.add(spot);
-  hemi = new THREE.HemisphereLight(0x2A2620, 0x5E594E, 0.02); scene.add(hemi);
+  hemi = new THREE.HemisphereLight(0x232A31, 0x4B545C, 0.02); scene.add(hemi);
   amb = new THREE.AmbientLight(0xffffff, 0); scene.add(amb);
-  point = new THREE.PointLight(0xC9B389, 0, 3.2, 1.9); point.position.set(0, 0.14, 0.55); scene.add(point);
-  rim = new THREE.DirectionalLight(0xDCBE85, 1.5); rim.position.set(2.3, 2.6, -2.5); scene.add(rim);
-  frontDir = new THREE.DirectionalLight(0xFFE0BC, 2.4); frontDir.position.set(-1.4, 2.2, 2.6); scene.add(frontDir);
+  point = new THREE.PointLight(0xAFC6D8, 0, 3.2, 1.9); point.position.set(0, 0.14, 0.55); scene.add(point);
+  rim = new THREE.DirectionalLight(0xBFD6E8, 1.5); rim.position.set(2.3, 2.6, -2.5); scene.add(rim);
+  frontDir = new THREE.DirectionalLight(0xEAF2F8, 2.4); frontDir.position.set(-1.4, 2.2, 2.6); scene.add(frontDir);
   const frontFill = new THREE.DirectionalLight(0xffffff, 0); frontFill.position.set(0, 0.4, 3); scene.add(frontFill);
   scene.userData.frontFill = frontFill;
 
@@ -323,7 +323,7 @@ function init() {
         ' float rays = 0.75 + 0.25 * sin(ang * 9.0 + uTime * 0.35) * uRay;',
         ' float core = pow(abs(sin(vUv.x * 3.14159)), uCore);',
         ' float a = uK * uInt * 0.16 * vert * rays * (0.35 + 0.65 * core);',
-        ' gl_FragColor = vec4(vec3(0.906, 0.784, 0.557) * a, a);',
+        ' gl_FragColor = vec4(vec3(0.62, 0.75, 0.90) * a, a);',
         '}'
       ].join('\n')
     });
@@ -335,7 +335,7 @@ function init() {
   const poolC = document.createElement('canvas'); poolC.width = poolC.height = 256;
   const px = poolC.getContext('2d');
   const pg = px.createRadialGradient(128, 128, 0, 128, 128, 128);
-  pg.addColorStop(0, 'rgba(231,200,142,0.85)'); pg.addColorStop(0.5, 'rgba(231,200,142,0.25)'); pg.addColorStop(1, 'rgba(231,200,142,0)');
+  pg.addColorStop(0, 'rgba(168,200,228,0.85)'); pg.addColorStop(0.5, 'rgba(168,200,228,0.25)'); pg.addColorStop(1, 'rgba(168,200,228,0)');
   px.fillStyle = pg; px.fillRect(0, 0, 256, 256);
   const poolTex = new THREE.CanvasTexture(poolC);
   poolMat = new THREE.MeshBasicMaterial({ map: poolTex, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending });
@@ -343,18 +343,18 @@ function init() {
   poolSprite.rotation.x = -Math.PI / 2;
   poolSprite.position.set(-0.3, 0.02, -0.75);
   scene.add(poolSprite);
-  const fanMat = new THREE.MeshBasicMaterial({ color: 0xE7C88E, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide });
+  const fanMat = new THREE.MeshBasicMaterial({ color: 0xA8C8E4, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide });
   const fan = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 5.2), fanMat);
   fan.position.set(-0.3, 2.4, -0.75);
   fan.rotation.x = 0.42;
   scene.add(fan);
   scene.userData.fanMat = fanMat;
 
-  // ---- carrier + camera model (the sock's role) ----
+  // ---- carrier + crane model (the sock's role) ----
   carrier = new THREE.Group(); scene.add(carrier);
   inner = new THREE.Group(); carrier.add(inner);
   const holder = new THREE.Group(); inner.add(holder);
-  new GLTFLoader().load('assets/models/camera.glb', gltf => {
+  new GLTFLoader().load('assets/models/crane.glb', gltf => {
     model = gltf.scene;
     const box = new THREE.Box3().setFromObject(model);
     const size = box.getSize(new THREE.Vector3());
@@ -376,7 +376,7 @@ function init() {
     return t;
   });
   for (let i = 0; i < 7; i++) {
-    const mat = new THREE.MeshBasicMaterial({ color: 0xE6DCCB, side: THREE.DoubleSide });
+    const mat = new THREE.MeshBasicMaterial({ color: 0xDDE3E6, side: THREE.DoubleSide });
     const mesh = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.3333), mat);
     mesh.visible = false;
     scene.add(mesh);
@@ -386,7 +386,7 @@ function init() {
   buildHead();
   bindScroll();
   window.__courtReady = true;
-  addEventListener('shashi-reveal', () => { coverAnchor(); size(); });
+  addEventListener('stoneforge-reveal', () => { coverAnchor(); size(); });
   size();
   addEventListener('resize', () => { S = settings(); coverAnchor(); size(); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => buildHead());
@@ -403,7 +403,7 @@ function buildHead() {
   const frustumH = 2 * Math.tan(vFov / 2) * 5;
   const frustumW = frustumH * (innerWidth / innerHeight);
   const lineW = frustumW * 0.46;
-  ['We Create', 'Memories.'].forEach((txt, i) => {
+  ['We Raise', 'Landmarks.'].forEach((txt, i) => {
     const h = makeHeadTexture(txt);
     const m = new THREE.MeshBasicMaterial({ map: h.tex, transparent: true, opacity: 0, depthWrite: false, fog: false });
     const plane = new THREE.Mesh(new THREE.PlaneGeometry(lineW, lineW * 0.25), m);
@@ -467,7 +467,7 @@ function frame(ts) {
   if (!inView && F === 0) { /* still render hero-adjacent flight start */ }
   idleT += dt;
   // intro scale-in (from the reveal event)
-  if (window.__shashiRevealed && !introStart) introStart = ts;
+  if (window.__stoneforgeRevealed && !introStart) introStart = ts;
   if (introStart) {
     const k = clamp01((ts - introStart) / 1700);
     const e = 1 - Math.pow(1 - k, 3);
@@ -546,7 +546,7 @@ function frame(ts) {
   const Kt = sstep(land, Ge(0.05), F);
   cards.forEach((c, i) => {
     if (i >= count) { c.mesh.visible = false; return; }
-    if (!c.tinted && c.tex.image) { c.mat.map = c.tex; c.tinted = true; c.mat.needsUpdate = true; } // colour stays spec 0xE6DCCB
+    if (!c.tinted && c.tex.image) { c.mat.map = c.tex; c.tinted = true; c.mat.needsUpdate = true; } // colour stays spec 0xDDE3E6
     const phase = ((i / count) + Me) % 1;
     const yH = -0.28 + phase * 1.59;
     const ang = -Math.PI / 4 - phase * Math.PI * 3;
