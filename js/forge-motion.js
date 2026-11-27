@@ -92,6 +92,21 @@
           var off = Math.max(-0.6, Math.min(0.6, (pr.left + pr.width / 2 - window.innerWidth / 2) / window.innerWidth));
           var img = panels[j].querySelector(".qq__img");
           if (img) img.style.translate = (-off * 26).toFixed(1) + "px " + ((tp - 0.5) * speeds[j % speeds.length]).toFixed(1) + "px";
+          /* card-title wipe, scrubbed to the card's own entry (no timing race):
+             off +0.5 = centre at the right edge, 0 = centred. The lime block
+             covers as the card enters (0.50→0.44) and exits as it settles
+             (0.44→0.35), so any scroll stop inside that range shows it. */
+          var wb = panels[j].querySelector(".fm-wipe-block"), wt = panels[j].querySelector(".fm-wipe-text");
+          if (wb && wt) {
+            var sx;
+            if (off >= 0.5) sx = 0;
+            else if (off >= 0.44) sx = (0.5 - off) / 0.06;
+            else if (off >= 0.35) sx = (off - 0.35) / 0.09;
+            else sx = 0;
+            wb.style.transform = "scaleX(" + sx.toFixed(3) + ")";
+            wb.style.transformOrigin = off >= 0.44 ? "left center" : "right center";
+            wt.style.opacity = off >= 0.5 ? "0" : "1";
+          }
         }
       }
     }
@@ -178,8 +193,9 @@
          fire them the moment a sliver appears; the observer below waits
          until the title is substantially in view. */
     });
+    var ioTargets = targets.filter(function (el) { return !el.classList.contains("qq__name"); });
     if (!("IntersectionObserver" in window)) {
-      targets.forEach(function (el) { el.classList.add("fm-wiped"); });
+      ioTargets.forEach(function (el) { el.classList.add("fm-wiped"); });
       return;
     }
     var io = new IntersectionObserver(function (es) {
@@ -190,7 +206,7 @@
         }
       });
     }, { threshold: 0.6 });
-    targets.forEach(function (el) { io.observe(el); });
+    ioTargets.forEach(function (el) { io.observe(el); });
   })();
 
   /* ---------- magnetic CTAs (fine pointers only) ---------- */
