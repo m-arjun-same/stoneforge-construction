@@ -97,7 +97,7 @@ let ghostSeg = null, h1FillTl = null, ghostFillTl = null, tagFillTl = null;
   $(".hero__copy", heroEl).appendChild(ghost);
   ghostSeg = $(".cf-seg", ghost);
   const tag = $(".hero__tagline", heroEl);
-  if (tag) { tag.style.setProperty("--final", "#8FB4FF"); tag.style.setProperty("--unread", "rgba(143,180,255,0)"); tag.style.setProperty("--edge", "#8FB4FF"); }
+  if (tag) { tag.style.setProperty("--final", "#D4FF24"); tag.style.setProperty("--unread", "rgba(212,255,36,0)"); tag.style.setProperty("--edge", "#D4FF24"); }
 })();
 function heroLayout() {
   if (!giantSeg || MOBILE()) return;
@@ -568,16 +568,16 @@ function startSlogan() {
       const pt = stitchPts[i], p = mapPt(pt.x, pt.y), v = 26 + pt.hash * 20;
       const ang = pt.hash * Math.PI;
       const dx = Math.cos(ang) * 5, dy = Math.sin(ang) * 5;
-      sctx.strokeStyle = "rgba(30,24,22,.18)"; sctx.lineWidth = 2.2;
+      sctx.strokeStyle = "rgba(3,4,7,.25)"; sctx.lineWidth = 2.2;
       sctx.beginPath(); sctx.moveTo(p.x - dx + 0.7, p.y - dy + 0.9); sctx.lineTo(p.x + dx + 0.7, p.y + dy + 0.9); sctx.stroke();
       sctx.strokeStyle = "rgba(" + v + "," + v + "," + (v + 6) + ",.98)"; sctx.lineWidth = 2.1;
       sctx.beginPath(); sctx.moveTo(p.x - dx, p.y - dy); sctx.lineTo(p.x + dx, p.y + dy); sctx.stroke();
-      fxctx.strokeStyle = "rgba(212,206,218,.3)"; fxctx.lineWidth = 0.55;
+      fxctx.strokeStyle = "rgba(212,255,36,.35)"; fxctx.lineWidth = 0.55;
       fxctx.beginPath(); fxctx.moveTo(p.x - dx, p.y - dy); fxctx.lineTo(p.x + dx, p.y + dy); fxctx.stroke();
     }
     if (n > 0 && stitchP < 1) {
       const last = stitchPts[n - 1], p = mapPt(last.x, last.y);
-      fxctx.fillStyle = "rgba(243,235,220,.95)";
+      fxctx.fillStyle = "rgba(212,255,36,.95)";
       fxctx.beginPath(); fxctx.arc(p.x, p.y, 2.1, 0, 7); fxctx.fill();
     }
   }

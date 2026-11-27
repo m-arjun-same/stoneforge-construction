@@ -4,7 +4,7 @@
 (function(){
 "use strict";
 const SERVICES=["High-Rise Construction","Concrete Works","Glass & Steel Facades","Interiors & Fit-Out","Villa Construction","Tower Renovation","Office Build-Outs","Retail Shells","Warehouse Construction","Heritage Restoration","Landscape Structures","Pool Construction","Structural Audits","Design & Blueprint","Turnkey Projects","Site Surveys","Drone Progress Films"];
-let service=SERVICES[0], place="Forge Yard — Whitefield", frameColor="#2F6BFF";
+let service=SERVICES[0], place="Forge Yard — Whitefield", frameColor="#1558C9";
 const $=id=>document.getElementById(id);
 const chips=$("serviceChips");
 SERVICES.forEach((s,i)=>{
@@ -38,7 +38,7 @@ function draw(){
   ctx.font="900 "+fs+"px 'FK Screamer', Impact, sans-serif";
   ctx.textAlign="center"; ctx.textBaseline="middle";
   ctx.shadowColor="rgba(0,0,0,.45)"; ctx.shadowBlur=10;
-  ctx.fillStyle="#E8EAED"; ctx.fillText(ini,0,0);
+  ctx.fillStyle="#FFFFFF"; ctx.fillText(ini,0,0);
   ctx.font=(fs*0.34)+"px 'Caveat', cursive"; ctx.fillStyle=frameColor;
   ctx.fillText("cast by STONEFORGE",0,fs*0.78);
   ctx.restore();
