@@ -1079,7 +1079,7 @@ try { if (localStorage.getItem("stoneforge-motion") === "paused") setMotion(true
     if (ci !== curChapter) {
       curChapter = ci;
       scrambleText(nameEl, chapters[ci].name, 0.6);
-      countEl.textContent = "0" + (ci + 1) + " / 07";
+      countEl.textContent = "0" + (ci + 1) + " / " + String(chapters.length).padStart(2, "0");
       $$("button", preview).forEach((b, i) => b.classList.toggle("is-cur", i === ci));
     }
     if (t <= 0.001 && !buzzed) { buzzed = true; nav.classList.add("is-buzz"); setTimeout(() => nav.classList.remove("is-buzz"), 1150); }

@@ -125,7 +125,7 @@
       var it = fmPending[i];
       if (it.el.classList.contains(it.cls)) { fmPending.splice(i, 1); continue; }
       var r = it.el.getBoundingClientRect();
-      if (r.bottom > -40 && r.top < window.innerHeight + 40) { it.el.classList.add(it.cls); fmPending.splice(i, 1); }
+      if (r.bottom > -40 && r.top < window.innerHeight + 40 && r.right > -40 && r.left < window.innerWidth + 40) { it.el.classList.add(it.cls); fmPending.splice(i, 1); }
     }
   }, 400);
   reveal(".foot__legal > *, .foot__nav > *", "fm-in", true);
