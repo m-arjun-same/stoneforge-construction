@@ -174,7 +174,9 @@
       block.className = "fm-wipe-block";
       block.setAttribute("aria-hidden", "true");
       el.appendChild(block);
-      fmPending.push({ el: el, cls: "fm-wiped" });
+      /* NOTE: wipe targets are NOT pushed to fmPending — the sweep would
+         fire them the moment a sliver appears; the observer below waits
+         until the title is substantially in view. */
     });
     if (!("IntersectionObserver" in window)) {
       targets.forEach(function (el) { el.classList.add("fm-wiped"); });
@@ -187,7 +189,7 @@
           io.unobserve(en.target);
         }
       });
-    }, { threshold: 0.35 });
+    }, { threshold: 0.6 });
     targets.forEach(function (el) { io.observe(el); });
   })();
 

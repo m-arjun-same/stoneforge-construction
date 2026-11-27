@@ -734,6 +734,6 @@ html.is-motion-paused *,html.is-motion-paused *:before,html.is-motion-paused *:a
 .fm-wipe{position:relative}
 .fm-wipe-text{opacity:0}
 .fm-wipe-block{position:absolute;inset:-.08em -.12em;background:#D4FF24;transform:scaleX(0);pointer-events:none}
-.fm-wiped .fm-wipe-text{opacity:1;transition:opacity .01s linear .38s}
-.fm-wiped .fm-wipe-block{animation:fmWipe .85s cubic-bezier(.76,0,.24,1) forwards}
+.fm-wiped .fm-wipe-text{opacity:1;transition:opacity .01s linear .54s}
+.fm-wiped .fm-wipe-block{animation:fmWipe 1.2s cubic-bezier(.76,0,.24,1) forwards}
 @keyframes fmWipe{0%{transform:scaleX(0);transform-origin:left center}45%{transform:scaleX(1);transform-origin:left center}55%{transform:scaleX(1);transform-origin:right center}100%{transform:scaleX(0);transform-origin:right center}}
