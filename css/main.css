@@ -451,21 +451,18 @@ html.trans-var .qq__bridge{display:flex}
 .dusk:after{content:"";position:absolute;inset:0;opacity:.22;mix-blend-mode:soft-light;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px}
 .dusk__sun{position:absolute;left:50%;top:0;width:76%;height:44%;transform:translate(-50%,-52%);background:radial-gradient(50% 50% at 50% 50%,rgba(212,255,36,.85),rgba(212,255,36,.35) 46%,transparent 72%);filter:blur(28px);opacity:var(--suno)}
 
-/* ---------- Footer — Forge-Rise (own code, meadow-rise composition):
-   serif-italic CTA floats over six painted ridges rolling into haze;
-   the ridges rise with the scroll and the front ridge is the ground
-   for the link columns, newsletter and socials. No photos. ---------- */
+/* ---------- Footer — Forge-Rise (own code):
+   serif-italic CTA over the cobalt gradient, straight onto the black
+   ground for the link columns, newsletter and socials. No photos. ---------- */
 .foot{position:relative;z-index:25;overflow:hidden;color:var(--white);background:linear-gradient(180deg,#1558C9 0%,rgba(21,88,201,.72) 34%,rgba(21,88,201,.5) 58%,rgba(21,88,201,.3) 78%,#030407 100%)}
-.foot__sky{position:relative;z-index:3;text-align:center;padding:6.5em 2em 0}
+.foot__sky{position:relative;z-index:3;text-align:center;padding:6.5em 2em 3em}
 .foot__kicker{margin:0 0 1.1em;font-family:var(--mono);font-size:.72em;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.6)}
 .foot__slogan{margin:0;font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(2.6em,5.6vw,5.4em);line-height:1.04;color:#FFFFFF;letter-spacing:-.01em}
 .foot__slogan i{font-style:italic;color:var(--terra)}
 .foot__cta{display:inline-flex;align-items:center;gap:.6em;margin-top:1.9em;padding:.95em 1.9em;border-radius:9999px;background:var(--ink);color:var(--cream);font-family:var(--mono);font-size:.78em;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:background var(--transition-default),transform var(--transition-default)}
 .foot__cta:hover{background:var(--terra);color:#030407;transform:translateY(-2px)}
-.foot__hills{display:block;width:100%;height:clamp(180px,38vh,430px);margin-top:-1.5em;position:relative;z-index:1}
-.fridge--1{fill:#1558C9}.fridge--2{fill:rgba(21,88,201,.8)}.fridge--3{fill:rgba(21,88,201,.6)}.fridge--4{fill:rgba(21,88,201,.42)}.fridge--5{fill:rgba(21,88,201,.25)}.fridge--6{fill:#030407}
 .foot__grain{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.16;mix-blend-mode:soft-light;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");background-size:240px 240px}
-.foot__ground{position:relative;z-index:3;background:#030407;margin-top:-4.2em;padding:0 6.1em}
+.foot__ground{position:relative;z-index:3;background:#030407;margin-top:0;padding:0 6.1em}
 .foot__grid{display:grid;grid-template-columns:1.5fr .62fr .78fr .9fr 1.15fr;gap:2.6em;padding:1.5em 0 3.2em}
 .foot__mark{margin:0;font-family:var(--display);font-weight:900;font-size:1.9em;letter-spacing:.04em;text-transform:uppercase;color:var(--cream)}
 .foot__mark sup{font-size:.42em;color:var(--terra)}
@@ -494,9 +491,8 @@ html.trans-var .qq__bridge{display:flex}
 .foot__link:hover{color:var(--cream)}
 .foot__link--mail{color:var(--terra)}
 @media (max-width:900px){
-  .foot__sky{padding:4.5em 1.4em 0}
-  .foot__hills{height:210px;margin-top:-.5em}
-  .foot__ground{padding:0 1.6em;margin-top:-2.6em}
+  .foot__sky{padding:4.5em 1.4em 2.5em}
+  .foot__ground{padding:0 1.6em;margin-top:0}
   .foot__grid{grid-template-columns:1fr 1fr;gap:2em 1.6em;padding-bottom:2.4em}
   .foot__brand,.foot__news{grid-column:1/-1}
   .foot__bar{flex-direction:column;align-items:flex-start;gap:1.4em}
