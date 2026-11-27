@@ -333,7 +333,7 @@ function wt(instant) {
     if (tagFillTl) tagFillTl.play();
   }, 0.2);
   tl.fromTo(".hero__tagline > span", { y: "0.9em", opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.06 }, 0.4);
-  tl.fromTo(".hero__h1-line--giant", { y: "0.4em" }, { y: 0, duration: 0.9, ease: "power3.out" }, 0.25);
+  tl.fromTo(".hero__h1-line--giant", { y: 24 }, { y: 0, duration: 0.9, ease: "power3.out" }, 0.25);
   tl.fromTo(".hero__rail", { opacity: 0 }, { opacity: 1, duration: 0.8, stagger: 0.15 }, 2.0);
   const rayO = { v: 0 };
   tl.to(rayO, { v: 1, duration: 1.2, ease: "power1.inOut", onUpdate: () => heroEl.style.setProperty("--h1-ray-o", rayO.v) }, 0.9);
@@ -918,20 +918,15 @@ setTimeout(() => {
 /* ---------------- Chrome: bar, sound, ink zones ---------------- */
 const bar = $(".bar"), snd = $("#snd");
 (function initChrome() {
-  let lastY = 0;
+  // Bar stays visible while scrolling (the nav must stay reachable); no auto-hide.
   gsap.ticker.add(() => {
     const y = scrollY;
-    if (bar) {
-      if (y > 80 && y > lastY + 4) bar.classList.add("bar--hidden");
-      else if (y < 80 || y < lastY - 4) bar.classList.remove("bar--hidden");
-    }
     if (snd) {
       const heroState = y <= 40;
       snd.classList.toggle("snd--hero", heroState);
       const learn = $(".hero__learn", heroEl);
       if (learn) learn.style.setProperty("--cue-shift", heroState ? (snd.offsetWidth + 1.166667 * sf()) + "px" : "0px");
     }
-    lastY = y;
   });
   function inkST(targets, cls, start, end) {
     if (!targets) return;
