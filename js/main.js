@@ -868,19 +868,6 @@ setTimeout(() => {
   }
 }, 5000);
 
-/* ---------------- Dusk (empty light transition) ---------------- */
-(function initDusk() {
-  const dusk = $("#dusk"); if (!dusk) return;
-  ScrollTrigger.create({
-    trigger: dusk, start: "top bottom", end: "bottom bottom", scrub: 0.5,
-    onUpdate: self => {
-      const p = self.progress;
-      dusk.style.setProperty("--ay", (-85 + p * 73) + "%");
-      dusk.style.setProperty("--suno", String(p * 0.85));
-    }
-  });
-})();
-
 /* ---------------- Footer slideshow ---------------- */
 (function initFoot() {
   const slides = $$(".foot__slide");
@@ -928,12 +915,10 @@ const bar = $(".bar"), snd = $("#snd");
       if (learn) learn.style.setProperty("--cue-shift", heroState ? (snd.offsetWidth + 1.166667 * sf()) + "px" : "0px");
     }
   });
-  function inkST(targets, cls, start, end) {
-    if (!targets) return;
-    ScrollTrigger.create({ trigger: "#finale", start, endTrigger: "#dusk", end, toggleClass: { targets, className: cls } });
-  }
-  inkST(bar, "bar--ink", "top 5%", "45% top");
-  inkST(snd, "snd--ink", "top 5%", "45% top");
+  // Header text is black over the pale hero sky; white once the hero scrolls away.
+  ScrollTrigger.create({ trigger: "#hero", start: "bottom 90px", end: "max", toggleClass: { targets: bar, className: "bar--ink" } });
+  // Sound toggle stays light over the dark finale → footer run.
+  ScrollTrigger.create({ trigger: "#finale", start: "top 5%", endTrigger: "#footer", end: "bottom bottom", toggleClass: { targets: snd, className: "snd--ink" } });
   if (snd) snd.addEventListener("click", () => {
     const on = snd.classList.toggle("snd--on");
     snd.classList.toggle("snd--off", !on);
@@ -1011,8 +996,7 @@ try { if (localStorage.getItem("stoneforge-motion") === "paused") setMotion(true
   const chapters = [
     { el: "#hero", name: "THE FORGE" }, { el: "#court", name: "THE JOURNEY" },
     { el: "#tech", name: "DISCIPLINES" }, { el: "#team", name: "YOUR MARK" },
-    { el: "#testimonials", name: "WORD OF MOUTH" }, { el: "#finale", name: "RAISE IT" },
-    { el: "#dusk", name: "FINAL BEAM" }
+    { el: "#testimonials", name: "WORD OF MOUTH" }, { el: "#finale", name: "RAISE IT" }
   ];
   const nav = document.createElement("nav");
   nav.className = "shotclock"; nav.id = "shotclock"; nav.setAttribute("aria-label", "Chapters");
@@ -1069,7 +1053,7 @@ try { if (localStorage.getItem("stoneforge-motion") === "paused") setMotion(true
   computeGeom();
   addEventListener("stoneforge-reveal", () => setTimeout(computeGeom, 60));
   ScrollTrigger.addEventListener("refresh", computeGeom);
-  ScrollTrigger.create({ trigger: "#finale", start: "top 8%", endTrigger: "#dusk", end: "top 80%", toggleClass: { targets: nav, className: "shotclock--ink" } });
+  ScrollTrigger.create({ trigger: "#finale", start: "top 8%", endTrigger: "#footer", end: "top 80%", toggleClass: { targets: nav, className: "shotclock--ink" } });
   $("[data-sc-index]", nav).addEventListener("click", () => preview.classList.toggle("is-on"));
   let curChapter = -1, buzzed = false, lastY = -1;
   gsap.ticker.add(() => {

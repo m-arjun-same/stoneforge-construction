@@ -85,11 +85,13 @@
     if (techSec && panels.length) {
       var r = techSec.getBoundingClientRect();
       if (r.bottom > -80 && r.top < window.innerHeight + 80) {
+        var tp = Math.max(0, Math.min(1, (window.innerHeight - r.top) / (window.innerHeight + r.height)));
+        var speeds = [30, -18, 26, -14]; /* scroll-5 drift: each panel falls at its own rate */
         for (var j = 0; j < panels.length; j++) {
           var pr = panels[j].getBoundingClientRect();
           var off = Math.max(-0.6, Math.min(0.6, (pr.left + pr.width / 2 - window.innerWidth / 2) / window.innerWidth));
           var img = panels[j].querySelector(".qq__img");
-          if (img) img.style.translate = (-off * 26).toFixed(1) + "px 0px";
+          if (img) img.style.translate = (-off * 26).toFixed(1) + "px " + ((tp - 0.5) * speeds[j % speeds.length]).toFixed(1) + "px";
         }
       }
     }
@@ -156,6 +158,37 @@
       if (r.top < window.innerHeight * 0.62 && r.bottom > 0) s.classList.add("fm-lit");
     }
     requestAnimationFrame(beamWatch);
+  })();
+
+  /* ---------- lime block-wipe title reveals (text-15, rebuilt in own code) ---------- */
+  (function wipeReveals() {
+    var targets = Array.prototype.slice.call(document.querySelectorAll(".qq__name, .court__title"));
+    if (!targets.length) return;
+    targets.forEach(function (el) {
+      el.classList.add("fm-wipe");
+      var text = document.createElement("span");
+      text.className = "fm-wipe-text";
+      while (el.firstChild) text.appendChild(el.firstChild);
+      el.appendChild(text);
+      var block = document.createElement("span");
+      block.className = "fm-wipe-block";
+      block.setAttribute("aria-hidden", "true");
+      el.appendChild(block);
+      fmPending.push({ el: el, cls: "fm-wiped" });
+    });
+    if (!("IntersectionObserver" in window)) {
+      targets.forEach(function (el) { el.classList.add("fm-wiped"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (en.isIntersecting || en.boundingClientRect.bottom < 0) {
+          en.target.classList.add("fm-wiped");
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    targets.forEach(function (el) { io.observe(el); });
   })();
 
   /* ---------- magnetic CTAs (fine pointers only) ---------- */
