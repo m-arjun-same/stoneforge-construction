@@ -83,19 +83,23 @@ let ghostSeg = null, h1FillTl = null, ghostFillTl = null, tagFillTl = null;
   const cut = txt.lastIndexOf(" ");
   const pre = txt.slice(0, cut), last = txt.slice(cut + 1);
   giantSeg.innerHTML = '<span class="hero__h1-word hero__h1-word--pre">' + pre + '</span> <span class="hero__h1-word hero__h1-word--last">' + last + "</span>";
-  ["ray", "sweep"].forEach(kind => {
-    const s = document.createElement("span");
-    s.className = "hero__h1-light hero__h1-light--" + kind;
-    s.setAttribute("aria-hidden", "true");
-    s.innerHTML = giantSeg.innerHTML;
-    giantSeg.appendChild(s);
-  });
-  const ghost = document.createElement("div");
-  ghost.className = "hero__h1-ghost-line";
-  ghost.setAttribute("aria-hidden", "true");
-  ghost.innerHTML = '<span class="cf-seg"><span class="hero__h1-word hero__h1-word--pre">' + pre + '</span> <span class="hero__h1-word hero__h1-word--last">' + last + "</span></span>";
-  $(".hero__copy", heroEl).appendChild(ghost);
-  ghostSeg = $(".cf-seg", ghost);
+  // Ghost + light-ray copies only when the headline still carries data-fill
+  // (removed for the Lucas Martin placement: solid white letters instead).
+  if (giantLine.hasAttribute("data-fill")) {
+    ["ray", "sweep"].forEach(kind => {
+      const s = document.createElement("span");
+      s.className = "hero__h1-light hero__h1-light--" + kind;
+      s.setAttribute("aria-hidden", "true");
+      s.innerHTML = giantSeg.innerHTML;
+      giantSeg.appendChild(s);
+    });
+    const ghost = document.createElement("div");
+    ghost.className = "hero__h1-ghost-line";
+    ghost.setAttribute("aria-hidden", "true");
+    ghost.innerHTML = '<span class="cf-seg"><span class="hero__h1-word hero__h1-word--pre">' + pre + '</span> <span class="hero__h1-word hero__h1-word--last">' + last + "</span></span>";
+    $(".hero__copy", heroEl).appendChild(ghost);
+    ghostSeg = $(".cf-seg", ghost);
+  }
   const tag = $(".hero__tagline", heroEl);
   if (tag) { tag.style.setProperty("--final", "#D4FF24"); tag.style.setProperty("--unread", "rgba(212,255,36,0)"); tag.style.setProperty("--edge", "#D4FF24"); }
 })();
@@ -275,6 +279,7 @@ function setFinalStates() {
   gsap.set(".hero__tagline > span", { opacity: 1, y: 0 });
   gsap.set([".hero__para", ".hero__cta-row"], { opacity: 1, y: 0 });
   gsap.set(".hero__prod-card", { opacity: 1 });
+  gsap.set(".hero__rail", { opacity: 1 });
   const learn = $(".hero__learn", heroEl); if (learn) learn.classList.add("is-on");
   heroEl.style.setProperty("--h1-ray-o", 1);
 }
@@ -296,7 +301,7 @@ function wt(instant) {
     return;
   }
   lenis.stop();
-  h1FillTl = playColorFill($(".hero__h1", heroEl), { manual: true, dur: 2.6 });
+  h1FillTl = giantLine.hasAttribute("data-fill") ? playColorFill($(".hero__h1", heroEl), { manual: true, dur: 2.6 }) : null;
   ghostFillTl = ghostSeg ? playColorFill(ghostSeg.closest(".hero__h1-ghost-line"), { manual: true, dur: 2.6 }) : null;
   tagFillTl = playColorFill($(".hero__tagline", heroEl), { manual: true, dur: 1.56 });
   // ke(): any blocks still visible step away one per 28ms (spec §1.4)
@@ -328,6 +333,8 @@ function wt(instant) {
     if (tagFillTl) tagFillTl.play();
   }, 0.2);
   tl.fromTo(".hero__tagline > span", { y: "0.9em", opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.06 }, 0.4);
+  tl.fromTo(".hero__h1-line--giant", { y: "0.4em" }, { y: 0, duration: 0.9, ease: "power3.out" }, 0.25);
+  tl.fromTo(".hero__rail", { opacity: 0 }, { opacity: 1, duration: 0.8, stagger: 0.15 }, 2.0);
   const rayO = { v: 0 };
   tl.to(rayO, { v: 1, duration: 1.2, ease: "power1.inOut", onUpdate: () => heroEl.style.setProperty("--h1-ray-o", rayO.v) }, 0.9);
   tl.fromTo(".hero__para", { y: "0.875em", opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, 1.76);
@@ -938,6 +945,45 @@ const bar = $(".bar"), snd = $("#snd");
     snd.setAttribute("aria-pressed", on);
     snd.setAttribute("aria-label", on ? "Mute sound" : "Play sound");
   });
+})();
+
+/* ---------------- Bar clock + mobile menu ---------------- */
+(function initBar() {
+  const clock = $("#barClock");
+  function tick() {
+    if (!clock) return;
+    const d = new Date();
+    let h = d.getHours();
+    const m = String(d.getMinutes()).padStart(2, "0");
+    const ap = h >= 12 ? "PM" : "AM";
+    h = h % 12 || 12;
+    clock.textContent = h + ":" + m + " " + ap;
+  }
+  tick();
+  setInterval(tick, 20000);
+  const menu = $("#barMenu"), nav = $("#barNav");
+  if (menu && nav && bar) {
+    menu.addEventListener("click", () => {
+      const open = bar.classList.toggle("bar--open");
+      menu.setAttribute("aria-expanded", String(open));
+      menu.setAttribute("aria-label", open ? "Close menu" : "Menu");
+    });
+    nav.addEventListener("click", e => {
+      if (e.target.closest("a")) {
+        bar.classList.remove("bar--open");
+        menu.setAttribute("aria-expanded", "false");
+        menu.setAttribute("aria-label", "Menu");
+      }
+    });
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && bar.classList.contains("bar--open")) {
+        bar.classList.remove("bar--open");
+        menu.setAttribute("aria-expanded", "false");
+        menu.setAttribute("aria-label", "Menu");
+        menu.focus();
+      }
+    });
+  }
 })();
 
 /* ---------------- Motion toggle (delegated) ---------------- */

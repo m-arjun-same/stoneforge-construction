@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#030407">
 <link rel="preload" href="assets/fonts/FKScreamer-Black.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/main.css?v=19">
+<link rel="stylesheet" href="css/main.css?v=20">
 <script type="application/ld+json">
 {"@context":"https://schema.org","type":"LocalBusiness","name":"STONEFORGE","email":"hello@stoneforgebuilds.com","telephone":"+91 8047122650","address":{"@type":"PostalAddress","streetAddress":"Plot 42, Forge Yard, Whitefield Industrial Area","addressLocality":"Bengaluru","postalCode":"560066","addressCountry":"IN"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","bestRating":"5"}}
 </script>
@@ -43,11 +43,15 @@
 
 <!-- Top bar -->
 <header class="bar" id="bar">
-  <a class="bar__logo" href="#hero" aria-label="STONEFORGE — home">STONE<b>FORGE</b>®</a>
-  <a class="btn btn--icon btn--light bar__cta" href="kit.html" data-pt-link data-pt-name="Book a Consultation">
-    <span class="btn__bg"><span class="btn__bg-hover"></span></span>
-    <span class="btn__inner"><span class="btn__mask"><span class="btn__text">Book a Consultation</span></span><span class="btn__icon-wrap"><span class="btn__icon-bg"></span><span class="btn__icon-mask"><span class="btn__icon-list"><svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg><svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg><svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></span></span></span>
-  </a>
+  <a class="bar__logo" href="#hero" aria-label="STONEFORGE — home">STONE<b>FORGE</b>® <span class="bar__clock" id="barClock" aria-hidden="true"></span></a>
+  <nav class="bar__nav" id="barNav" aria-label="Primary">
+    <a href="#hero">Home</a><span aria-hidden="true">/</span>
+    <a href="#court">Projects</a><span aria-hidden="true">/</span>
+    <a href="kit.html" data-pt-link data-pt-name="Contact">Contact</a>
+    <a class="bar__nav-cta" href="kit.html" data-pt-link data-pt-name="Book a Consultation">Book a Consultation</a>
+  </nav>
+  <a class="bar__cta-text" href="kit.html" data-pt-link data-pt-name="Book a Consultation">Book a Consultation</a>
+  <button class="bar__menu" id="barMenu" type="button" aria-expanded="false" aria-controls="barNav" aria-label="Menu"><span></span><span></span></button>
 </header>
 <button id="snd" class="snd snd--off" type="button" data-snd aria-pressed="false" aria-label="Turn sound on">
   <span class="snd__ring"><span class="snd__eq"><i></i><i></i><i></i><i></i></span></span><span class="snd__div"></span>
@@ -69,42 +73,15 @@
     <img class="hero__floor-strip" src="assets/img/hero.webp" alt="" aria-hidden="true">
     <div class="hero__seam" aria-hidden="true"></div>
     <div class="hero__copy">
-      <h1 class="hero__h1" data-fill="ghost" data-fit="phone"><span class="hero__h1-line hero__h1-line--giant"><span class="cf-seg">We Build What Lasts</span></span></h1>
+      <p class="hero__tagline"><span class="hero__h1-line"><span class="cf-seg">Solidly</span></span></p>
+      <h1 class="hero__h1" data-fit="phone"><span class="hero__h1-line hero__h1-line--giant"><span class="cf-seg">We Build What Lasts</span></span></h1>
       <div class="hero__main">
         <div class="hero__headline">
-          <p class="hero__tagline"><span class="hero__h1-line"><span class="cf-seg">Solidly</span></span></p>
           <p class="hero__para"><b>STONEFORGE®</b> — a design-and-build construction studio in Bengaluru. We don't just pour concrete. We raise homes and towers built to last for generations.</p>
-          <div class="hero__cta-row">
-            <a class="btn btn--icon btn--light" href="kit.html" data-pt-link data-pt-name="Book a Consultation">
-              <span class="btn__bg"><span class="btn__bg-hover"></span></span>
-              <span class="btn__inner"><span class="btn__mask"><span class="btn__text">Book a Consultation</span></span><span class="btn__icon-wrap"><span class="btn__icon-bg"></span><span class="btn__icon-mask"><span class="btn__icon-list"><svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg><svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg><svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></span></span></span>
-            </a>
-            <a class="btn btn--icon btn--ghost" href="#tech">
-              <span class="btn__bg"><span class="btn__bg-hover"></span></span>
-              <span class="btn__inner"><span class="btn__mask"><span class="btn__text">Explore What We Build</span></span><span class="btn__icon-wrap"><span class="btn__icon-bg"></span><span class="btn__icon-mask"><span class="btn__icon-list"><svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg><svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg><svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span></span></span></span>
-            </a>
-          </div>
         </div>
       </div>
-      <div class="hero__slogan" data-slogans aria-hidden="true">
-        <span class="hero__slogan-item hero__slogan-item--a"><span class="hero__slogan-dot"></span><span class="hero__slogan-text">We don't just pour concrete.</span></span>
-        <span class="hero__slogan-item hero__slogan-item--b"><span class="hero__slogan-dot"></span><span class="hero__slogan-text">We raise landmarks.</span></span>
-        <span class="hero__slogan-item hero__slogan-item--c"><span class="hero__slogan-dot"></span><span class="hero__slogan-text">Built for generations.</span></span>
-        <span class="hero__slogan-item hero__slogan-item--d"><span class="hero__slogan-dot"></span><span class="hero__slogan-text">Bengaluru · Since 2016</span></span>
-      </div>
-      <a class="hero__prod-card" data-court-anchor href="kit.html" data-pt-link data-pt-name="Book a Consultation" aria-label="Book a consultation — STONEFORGE site card">
-        <i class="hero__pc-corner hero__pc-corner--tl" aria-hidden="true"></i>
-        <i class="hero__pc-corner hero__pc-corner--tr" aria-hidden="true"></i>
-        <i class="hero__pc-corner hero__pc-corner--bl" aria-hidden="true"></i>
-        <i class="hero__pc-corner hero__pc-corner--br" aria-hidden="true"></i>
-        <span class="hero__pc-reticle" aria-hidden="true"></span>
-        <span class="hero__pc-scan" aria-hidden="true"></span>
-        <span class="hero__pc-top" aria-hidden="true"><b>BLD·01</b></span>
-        <span class="hero__pc-coords" aria-hidden="true">X 12.97 · Y 77.59</span>
-        <svg class="hero__prod-card-icon" viewBox="0 0 48 36" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 32V8M6 8h36M14 8l16 10M36 8v8M8 32h14"/></svg>
-        <span class="hero__prod-card-live" aria-hidden="true"></span>
-        <span class="hero__prod-card-tag">Site / 01</span>
-      </a>
+      <p class="hero__rail hero__rail--place" aria-hidden="true">Bengaluru — Since 2016</p>
+      <p class="hero__rail hero__rail--count" aria-hidden="true">04 — Signature Disciplines</p>
       <a class="hero__learn hero__learn--v2" data-cue href="#court">
         <span class="hero__learn-text">Scroll to explore</span>
         <span class="hero__learn-drib" aria-hidden="true"><i class="hero__learn-ball"></i><i class="hero__learn-ghost hero__learn-ghost--1"></i><i class="hero__learn-ghost hero__learn-ghost--2"></i><i class="hero__learn-ring"></i><i class="hero__learn-floor"></i></span>
@@ -327,7 +304,7 @@
   <!-- ============ DUSK (empty light transition, as the reference) ============ -->
   <section class="dusk" id="dusk" aria-hidden="true"><span class="dusk__sun"></span></section>
 
-  <!-- ============ FOOTER — Forge-Rise: serif-italic CTA over six painted ridges ============ -->
+  <!-- ============ FOOTER — Forge-Rise: serif-italic CTA over cobalt, straight to the black ground ============ -->
   <footer class="foot" id="footer">
     <div class="foot__sky">
       <p class="foot__kicker">Stoneforge — Builders &amp; Architects, Bengaluru</p>
@@ -402,7 +379,7 @@
 <script src="vendor/ScrollTrigger.min.js"></script>
 <script src="vendor/lenis.min.js"></script>
 <script src="js/hero-scene.js?v=1"></script>
-<script src="js/main.js?v=15"></script>
+<script src="js/main.js?v=16"></script>
 <script src="js/forge-motion.js?v=1"></script>
 <script src="js/foot-rise.js?v=1"></script>
 <script src="js/journal.js?v=1"></script>
